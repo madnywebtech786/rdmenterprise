@@ -47,9 +47,9 @@ const reasons = [
 ];
 
 const proofData = [
-  { val: "8+",   label: "Years in Business" },
   { val: "5K+",  label: "Jobs Completed" },
   { val: "98%",  label: "On-Time Rate" },
+  { val: "500+", label: "5-Star Reviews" },
   { val: "100%", label: "Satisfaction Rate" },
 ];
 

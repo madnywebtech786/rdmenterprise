@@ -13,9 +13,9 @@ const highlights = [
 ];
 
 const counterData = [
-  { value: 8,    suffix: "+", label: "Years in Business" },
-  { value: 5000, suffix: "+", label: "Deliveries Completed" },
+  { value: 5000, suffix: "+", label: "Jobs Completed" },
   { value: 500,  suffix: "+", label: "5-Star Reviews" },
+  { value: 98,   suffix: "%", label: "Client Satisfaction" },
 ];
 
 /* Smooth animated counter using a spring on a MotionValue */
@@ -176,7 +176,7 @@ export default function About() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.2 }}
             >
-              <span className="dot-badge mb-5 inline-flex">About RDM Enterprises</span>
+              <span className="dot-badge mb-5 inline-flex">About RDM enterprise</span>
             </motion.div>
 
             {/* Headline — word-by-word reveal */}
@@ -204,7 +204,7 @@ export default function About() {
               transition={{ delay: 0.5, duration: 0.6 }}
               className="font-body text-[#0D1D46]/65 text-lg leading-relaxed mb-6"
             >
-              RDM Enterprises was founded with one mission: to provide the most
+              RDM enterprise was founded with one mission: to provide the most
               dependable and professional delivery and moving services in the
               region. From single parcels to entire office relocations, we
               treat every job with the same dedication.

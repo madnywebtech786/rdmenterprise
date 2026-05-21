@@ -15,16 +15,16 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-const BASE_URL = "https://www.rdmenterprises.ca";
+const BASE_URL = "https://www.rdmenterprise.ca";
 
 export const metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "RDM Enterprises | Calgary Movers – Moving, Junk Removal & Labour",
-    template: "%s | RDM Enterprises Calgary",
+    default: "RDM enterprise | Calgary Movers – Moving, Junk Removal & Labour",
+    template: "%s | RDM enterprise Calgary",
   },
   description:
-    "RDM Enterprises — Calgary's trusted movers. Full-service residential and commercial moving, eco-friendly junk removal, packing, and jobsite labour at $100/hr. Licensed, insured, same-day available across Calgary, Airdrie, Cochrane, Chestermere, Okotoks, and Strathmore.",
+    "RDM enterprise — Calgary's trusted movers. Full-service residential and commercial moving, eco-friendly junk removal, packing, and jobsite labour at $100/hr. Licensed, insured, same-day available across Calgary, Airdrie, Cochrane, Chestermere, Okotoks, and Strathmore.",
   keywords: [
     "Calgary movers",
     "moving company Calgary",
@@ -38,7 +38,7 @@ export const metadata = {
     "eco-friendly junk removal Calgary",
     "jobsite labour Calgary",
     "hourly movers Calgary",
-    "RDM Enterprises Calgary",
+    "RDM enterprise Calgary",
     "Airdrie moving company",
     "Cochrane movers",
     "Chestermere moving",
@@ -47,9 +47,9 @@ export const metadata = {
     "Calgary moving and junk removal",
     "licensed movers Calgary Alberta",
   ],
-  authors: [{ name: "RDM Enterprises" }],
-  creator: "RDM Enterprises",
-  publisher: "RDM Enterprises",
+  authors: [{ name: "RDM enterprise" }],
+  creator: "RDM enterprise",
+  publisher: "RDM enterprise",
   robots: {
     index: true,
     follow: true,
@@ -59,8 +59,8 @@ export const metadata = {
     type: "website",
     locale: "en_CA",
     url: BASE_URL,
-    siteName: "RDM Enterprises",
-    title: "RDM Enterprises | Calgary Movers – Moving, Junk Removal & Labour",
+    siteName: "RDM enterprise",
+    title: "RDM enterprise | Calgary Movers – Moving, Junk Removal & Labour",
     description:
       "Calgary's trusted movers. Residential and commercial moving, junk removal, packing, and jobsite labour at $100/hr. Serving Calgary, Airdrie, Cochrane, Chestermere, Okotoks, and Strathmore.",
     images: [
@@ -68,13 +68,13 @@ export const metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "RDM Enterprises – Calgary Moving & Junk Removal Company",
+        alt: "RDM enterprise – Calgary Moving & Junk Removal Company",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "RDM Enterprises | Calgary Movers – Moving, Junk Removal & Labour",
+    title: "RDM enterprise | Calgary Movers – Moving, Junk Removal & Labour",
     description:
       "Calgary's trusted movers. Residential and commercial moving, junk removal, packing, and jobsite labour. Serving Calgary and surrounding Alberta communities.",
     images: ["/og-image.jpg"],
@@ -93,13 +93,13 @@ export const viewport = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "MovingCompany",
-  name: "RDM Enterprises",
-  alternateName: "RDM Enterprises Inc.",
+  name: "RDM enterprise",
+  alternateName: "RDM enterprise Inc.",
   description:
     "Calgary's trusted full-service moving company offering residential moving, commercial moving, office moving, packing and unpacking, eco-friendly junk removal, and jobsite labour at $100/hr.",
   url: BASE_URL,
   telephone: "+18255835070",
-  email: "info@rdmenterprises.ca",
+  email: "info@rdmenterprise.ca",
   logo: `${BASE_URL}/images/logo.png`,
   image: `${BASE_URL}/og-image.jpg`,
   priceRange: "$$",
@@ -160,8 +160,8 @@ const jsonLd = {
     ],
   },
   sameAs: [
-    "https://www.facebook.com/rdmenterprises",
-    "https://www.instagram.com/rdmenterprises",
+    "https://www.facebook.com/rdmenterprise",
+    "https://www.instagram.com/rdmenterprise",
   ],
 };
 

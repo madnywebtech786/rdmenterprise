@@ -2,9 +2,9 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ChevronDown, Check, PackageOpen, Archive, Building2, Trash2, HardHat, MessageCircle, Home, Briefcase, TrendingUp } from "lucide-react";
+import { ChevronDown, Check, PackageOpen, Archive, Building2, Trash2, HardHat, MessageCircle, Home, Briefcase, TrendingUp, LayoutGrid, Sofa, Leaf, ClipboardList } from "lucide-react";
 
-const OPTIONS = [
+const SERVICE_OPTIONS = [
   { value: "Residential Moving",   label: "Residential Moving",   Icon: Home         },
   { value: "Commercial Moving",    label: "Commercial Moving",    Icon: Briefcase    },
   { value: "Packing & Unpacking",  label: "Packing & Unpacking",  Icon: Archive      },
@@ -15,15 +15,34 @@ const OPTIONS = [
   { value: "Other",                label: "Other",                Icon: MessageCircle },
 ];
 
-export default function ServiceSelect({ value, onChange, required }) {
+const PROPERTY_TYPE_OPTIONS = [
+  { value: "House",     label: "House",     Icon: Home      },
+  { value: "Apartment", label: "Apartment", Icon: Building2 },
+  { value: "Condo",     label: "Condo",     Icon: LayoutGrid },
+  { value: "Office",    label: "Office",    Icon: Briefcase },
+];
+
+const JUNK_TYPE_OPTIONS = [
+  { value: "Junk Removal",        label: "Junk Removal",        Icon: Trash2       },
+  { value: "Furniture Removal",   label: "Furniture Removal",   Icon: Sofa         },
+  { value: "Appliance Removal",   label: "Appliance Removal",   Icon: PackageOpen  },
+  { value: "Construction Waste",  label: "Construction Waste",  Icon: HardHat      },
+  { value: "Yard Waste",          label: "Yard Waste",          Icon: Leaf         },
+  { value: "Garage Cleanup",      label: "Garage Cleanup",      Icon: Archive      },
+  { value: "Office Cleanup",      label: "Office Cleanup",      Icon: ClipboardList },
+  { value: "Other",               label: "Other",               Icon: MessageCircle },
+];
+
+export { SERVICE_OPTIONS, PROPERTY_TYPE_OPTIONS, JUNK_TYPE_OPTIONS };
+
+export default function ServiceSelect({ value, onChange, name = "service", options = SERVICE_OPTIONS, placeholder = "Select a service...", required, error }) {
   const [open,    setOpen]    = useState(false);
   const [focused, setFocused] = useState(-1);
   const containerRef          = useRef(null);
   const listRef               = useRef(null);
 
-  const selected = OPTIONS.find((o) => o.value === value) ?? null;
+  const selected = options.find((o) => o.value === value) ?? null;
 
-  /* close on outside click */
   useEffect(() => {
     if (!open) return;
     function onDown(e) {
@@ -33,30 +52,28 @@ export default function ServiceSelect({ value, onChange, required }) {
     return () => document.removeEventListener("mousedown", onDown);
   }, [open]);
 
-  /* close on Escape, navigate with arrows */
   const onKeyDown = useCallback((e) => {
     if (!open) {
       if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
         e.preventDefault();
         setOpen(true);
-        setFocused(selected ? OPTIONS.indexOf(selected) : 0);
+        setFocused(selected ? options.indexOf(selected) : 0);
       }
       return;
     }
     if (e.key === "Escape") { setOpen(false); return; }
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setFocused((f) => Math.min(f + 1, OPTIONS.length - 1));
+      setFocused((f) => Math.min(f + 1, options.length - 1));
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setFocused((f) => Math.max(f - 1, 0));
     } else if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      if (focused >= 0) pick(OPTIONS[focused].value);
+      if (focused >= 0) pick(options[focused].value);
     }
-  }, [open, focused, selected]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [open, focused, selected, options]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  /* scroll focused option into view */
   useEffect(() => {
     if (!open || focused < 0) return;
     const el = listRef.current?.children[focused];
@@ -64,30 +81,30 @@ export default function ServiceSelect({ value, onChange, required }) {
   }, [focused, open]);
 
   function pick(val) {
-    onChange({ target: { name: "service", value: val } });
+    onChange({ target: { name, value: val } });
     setOpen(false);
     setFocused(-1);
   }
 
   return (
     <div ref={containerRef} className="relative">
-      {/* Hidden native input for form validation */}
-      <input type="text" name="service" value={value} required={required} readOnly className="sr-only" tabIndex={-1} aria-hidden="true" />
+      <input type="text" name={name} value={value} required={required} readOnly className="sr-only" tabIndex={-1} aria-hidden="true" />
 
-      {/* Trigger */}
       <button
         type="button"
         role="combobox"
         aria-haspopup="listbox"
         aria-expanded={open}
-        aria-label="Select a service"
+        aria-label={placeholder}
         onKeyDown={onKeyDown}
-        onClick={() => { setOpen((o) => !o); setFocused(selected ? OPTIONS.indexOf(selected) : 0); }}
+        onClick={() => { setOpen((o) => !o); setFocused(selected ? options.indexOf(selected) : 0); }}
         className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl border bg-bg font-body text-sm
                     transition-all duration-200 text-left outline-none
-                    ${open
-                      ? "border-secondary ring-2 ring-secondary/10"
-                      : "border-surface-2 hover:border-[#0D1D46]/25 focus:border-secondary focus:ring-2 focus:ring-secondary/10"
+                    ${error
+                      ? "border-red-400 ring-2 ring-red-100"
+                      : open
+                        ? "border-secondary ring-2 ring-secondary/10"
+                        : "border-surface-2 hover:border-[#0D1D46]/25 focus:border-secondary focus:ring-2 focus:ring-secondary/10"
                     }`}
       >
         {selected ? (
@@ -96,7 +113,7 @@ export default function ServiceSelect({ value, onChange, required }) {
             <span className="flex-1 text-[#0D1D46] font-500">{selected.label}</span>
           </>
         ) : (
-          <span className="flex-1 text-[#0D1D46]/30">Select a service...</span>
+          <span className="flex-1 text-[#0D1D46]/30">{placeholder}</span>
         )}
         <motion.span
           animate={{ rotate: open ? 180 : 0 }}
@@ -107,13 +124,12 @@ export default function ServiceSelect({ value, onChange, required }) {
         </motion.span>
       </button>
 
-      {/* Dropdown */}
       <AnimatePresence>
         {open && (
           <motion.ul
             ref={listRef}
             role="listbox"
-            aria-label="Services"
+            aria-label={placeholder}
             initial={{ opacity: 0, y: -6, scaleY: 0.95 }}
             animate={{ opacity: 1, y: 0, scaleY: 1 }}
             exit={{ opacity: 0, y: -6, scaleY: 0.95 }}
@@ -124,7 +140,7 @@ export default function ServiceSelect({ value, onChange, required }) {
                        shadow-[0_8px_32px_rgba(13,29,70,0.12)]
                        overflow-hidden py-1.5"
           >
-            {OPTIONS.map((opt, i) => {
+            {options.map((opt, i) => {
               const isSelected = value === opt.value;
               const isFocused  = focused === i;
               return (

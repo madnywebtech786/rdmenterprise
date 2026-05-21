@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     q: "Are you licensed and insured?",
-    a: "Absolutely. RDM Enterprises is fully licensed and carries comprehensive liability insurance. Your belongings are covered throughout every job we handle.",
+    a: "Absolutely. RDM enterprise is fully licensed and carries comprehensive liability insurance. Your belongings are covered throughout every job we handle.",
   },
   {
     q: "What areas do you serve?",

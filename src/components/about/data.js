@@ -1,14 +1,14 @@
 import {
   Award, Clock, Shield, CheckCircle2, Truck, Users, Star,
-  MapPin, Phone, Zap, Heart, Target, Package, Home,
-  Building2, Leaf, TrendingUp,
+  Phone, Zap, Heart, Target, Package, Home,
+  Building2, Leaf,
 } from "lucide-react";
 
 export const stats = [
-  { value: 8,    suffix: "+", label: "Years in Business",  icon: TrendingUp },
   { value: 5000, suffix: "+", label: "Jobs Completed",      icon: Package    },
   { value: 500,  suffix: "+", label: "5-Star Reviews",      icon: Star       },
   { value: 98,   suffix: "%", label: "Client Satisfaction", icon: Heart      },
+  { value: 100,  suffix: "%", label: "Insured & Licensed",  icon: Shield     },
 ];
 
 export const team = [

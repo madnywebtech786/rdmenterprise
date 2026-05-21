@@ -9,20 +9,20 @@ export function generateStaticParams() {
   return services.map((s) => ({ id: s.id }));
 }
 
-const BASE_URL = "https://www.rdmenterprises.ca";
+const BASE_URL = "https://www.rdmenterprise.ca";
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
   const svc = getServiceById(id);
   if (!svc) return {};
   return {
-    title: `${svc.title} in Calgary, AB | RDM Enterprises`,
+    title: `${svc.title} in Calgary, AB | RDM enterprise`,
     description: svc.descriptionShort,
     keywords: [
       `${svc.title.toLowerCase()} Calgary`,
       `Calgary ${svc.title.toLowerCase()}`,
       `${svc.title.toLowerCase()} Calgary AB`,
-      "RDM Enterprises Calgary",
+      "RDM enterprise Calgary",
       "moving company Calgary",
       "Airdrie movers",
       "Cochrane movers",
@@ -31,14 +31,14 @@ export async function generateMetadata({ params }) {
     ],
     alternates: { canonical: `${BASE_URL}/services/${svc.id}` },
     openGraph: {
-      title: `${svc.title} in Calgary – RDM Enterprises`,
+      title: `${svc.title} in Calgary – RDM enterprise`,
       description: svc.descriptionShort,
       url: `${BASE_URL}/services/${svc.id}`,
-      images: [{ url: svc.image, width: 1200, height: 800, alt: `${svc.title} – RDM Enterprises Calgary` }],
+      images: [{ url: svc.image, width: 1200, height: 800, alt: `${svc.title} – RDM enterprise Calgary` }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${svc.title} in Calgary – RDM Enterprises`,
+      title: `${svc.title} in Calgary – RDM enterprise`,
       description: svc.descriptionShort,
       images: [svc.image],
     },

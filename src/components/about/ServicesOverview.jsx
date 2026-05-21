@@ -189,7 +189,7 @@ export default memo(function ServicesOverview() {
                       {svc.label}
                     </div>
                     <div className="font-body text-white/50 text-xs mt-0.5">
-                      RDM Enterprises
+                      RDM enterprise
                     </div>
                   </div>
                 </motion.div>

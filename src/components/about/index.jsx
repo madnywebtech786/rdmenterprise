@@ -6,7 +6,6 @@ import StatsSection     from "./StatsSection";
 import ValuesSection    from "./ValuesSection";
 import ProcessSection   from "./ProcessSection";
 import ServicesOverview from "./ServicesOverview";
-import TeamSection      from "./TeamSection";
 import TestimonialBanner from "./TestimonialBanner";
 import TrustSection     from "./TrustSection";
 import FinalCTA         from "./FinalCTA";
@@ -20,7 +19,6 @@ export default function AboutPage() {
       <ValuesSection />
       <ProcessSection />
       <ServicesOverview />
-      <TeamSection />
       <TestimonialBanner />
       <TrustSection />
       <FinalCTA />

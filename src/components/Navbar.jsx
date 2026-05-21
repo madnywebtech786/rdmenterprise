@@ -88,7 +88,7 @@ export default function Navbar() {
             <div className="bg-white rounded-md border border-surface-2 overflow-hidden w-30 h-16 flex items-center justify-center">
               <Image
                 src="/images/logo.png"
-                alt="RDM Enterprises"
+                alt="RDM enterprise"
                 width={120}
                 height={120}
                 className="object-contain"
@@ -252,7 +252,7 @@ export default function Navbar() {
             <div className="flex items-center justify-between py-4 mb-4">
               <a href="/" onClick={() => setMobileOpen(false)}>
                 <div className="bg-white rounded-md border border-white/20 overflow-hidden w-26 h-14 flex items-center justify-center">
-                  <Image src="/images/logo.png" alt="RDM Enterprises" width={52} height={52} className="object-contain" loading="lazy" />
+                  <Image src="/images/logo.png" alt="RDM enterprise" width={52} height={52} className="object-contain" loading="lazy" />
                 </div>
               </a>
               <button

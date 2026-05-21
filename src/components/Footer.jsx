@@ -1,4 +1,5 @@
-import { Phone, Mail, MapPin, Truck } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
+import Image from "next/image";
 
 function IconInstagram() {
   return (
@@ -71,24 +72,12 @@ export default function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-2">
             {/* Logo */}
-            <div className="flex items-center gap-3 mb-5">
-              <div
-                className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center
-                           shadow-[0_4px_16px_rgba(223,91,16,0.4)]"
-              >
-                <Truck size={22} className="text-white" />
-              </div>
-              <div>
-                <div className="font-heading font-900 text-lg text-white tracking-wide leading-tight">
-                  RDM Enterprises
+            <div className="mb-5">
+              <a href="/">
+                <div className="bg-white rounded-md border border-surface-2 overflow-hidden w-30 h-16 flex items-center justify-center">
+                  <Image src="/images/logo.png" alt="RDM enterprise" width={120} height={120} className="object-contain" loading="lazy" />
                 </div>
-                <div
-                  className="font-heading font-600 text-xs tracking-[0.2em] uppercase"
-                  style={{ color: "#DF5B10" }}
-                >
-                  Delivery Company
-                </div>
-              </div>
+              </a>
             </div>
 
             <p className="font-body text-sm text-white/50 leading-relaxed mb-6 max-w-xs">
@@ -107,8 +96,8 @@ export default function Footer() {
                 },
                 {
                   icon: Mail,
-                  text: "info@rdmenterprises.ca",
-                  href: "mailto:info@rdmenterprises.ca",
+                  text: "info@rdmenterprise.ca",
+                  href: "mailto:info@rdmenterprise.ca",
                 },
                 { icon: MapPin, text: "Calgary, Alberta", href: "#areas" },
               ].map((item) => {
@@ -175,16 +164,12 @@ export default function Footer() {
 
       {/* ── Bottom bar ── */}
       <div className="border-t border-white/8 py-6">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-6 flex flex-row items-center justify-center gap-4">
           <p className="font-body text-xs text-white/30 text-center md:text-left">
-            © {new Date().getFullYear()} RDM Enterprises Delivery Company. All
+            © {new Date().getFullYear()} RDM Enterprise Delivery Company. All
             rights reserved.
           </p>
-          <div className="flex items-center gap-1 font-body text-xs text-white/30">
-            <span>Built with</span>
-            <span style={{ color: "#DF5B10" }}>♥</span>
-            <span>for reliable service</span>
-          </div>
+          
         </div>
       </div>
     </footer>

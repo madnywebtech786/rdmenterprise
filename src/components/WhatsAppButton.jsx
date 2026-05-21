@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 
 const PHONE   = "18255835070";
-const MESSAGE = encodeURIComponent("Hi RDM Enterprises! I'd like to get a free quote.");
+const MESSAGE = encodeURIComponent("Hi RDM enterprise! I'd like to get a free quote.");
 const WA_URL  = `https://wa.me/${PHONE}?text=${MESSAGE}`;
 
 export default function WhatsAppButton() {

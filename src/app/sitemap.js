@@ -1,6 +1,6 @@
 import { services, movingSubServices } from "@/data/services";
 
-const BASE_URL = "https://www.rdmenterprises.ca";
+const BASE_URL = "https://www.rdmenterprise.ca";
 
 export default function sitemap() {
   const staticPages = [

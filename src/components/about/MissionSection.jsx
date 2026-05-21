@@ -8,7 +8,7 @@ import { Star, MapPin, CheckCircle2 } from "lucide-react";
 import { certifications } from "./data";
 
 const paragraphs = [
-  "RDM Enterprises was founded in 2016 with a single truck and an unwavering commitment to reliability. What started as a local Calgary moving company has grown into a full-service logistics company trusted by thousands of families and businesses.",
+  "RDM enterprise was founded in 2016 with a single truck and an unwavering commitment to reliability. What started as a local Calgary moving company has grown into a full-service logistics company trusted by thousands of families and businesses.",
   "We don't just move boxes — we move lives. Whether you're relocating your home, clearing out clutter, or need a last-minute delivery, our team brings professionalism and genuine care to every single job.",
   "Every crew member is background-checked, trained, and held to the same standard we'd want when someone enters our own home.",
 ];

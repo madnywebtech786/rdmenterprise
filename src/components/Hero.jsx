@@ -14,7 +14,7 @@ const slides = [
     badge: "Calgary's Trusted Movers",
     headline: ["We Move", "Anything,", "Anywhere."],
     headlineColors: ["white", "#DF5B10", "white"],
-    description: "From same-day junk removal to full office relocations. RDM Enterprises serves Calgary with precision, care, and speed you can count on.",
+    description: "From same-day junk removal to full office relocations. RDM enterprise serves Calgary with precision, care, and speed you can count on.",
     cta: { label: "Get a Free Quote", href: "#contact" },
     stats: [
       { value: "5K+", label: "Moves Done" },

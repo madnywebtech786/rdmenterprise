@@ -6,7 +6,7 @@ import { ArrowRight, Phone, Mail, MapPin } from "lucide-react";
 
 const contactItems = [
   { icon: Phone,  text: "+1 (825) 583-5070"        },
-  { icon: Mail,   text: "info@rdmenterprises.ca"   },
+  { icon: Mail,   text: "info@rdmenterprise.ca"   },
   { icon: MapPin, text: "Calgary, AB & Surrounding" },
 ];
 

@@ -6,10 +6,10 @@ import Image from "next/image";
 import { Star, Shield, ArrowRight, ChevronRight } from "lucide-react";
 
 const heroProof = [
-  { value: "8+",    label: "Years Serving Calgary"  },
-  { value: "5,000+",label: "Jobs Completed"        },
-  { value: "98%",   label: "Client Satisfaction"   },
-  { value: "500+",  label: "5-Star Reviews"        },
+  { value: "5,000+", label: "Jobs Completed"      },
+  { value: "98%",    label: "Client Satisfaction" },
+  { value: "500+",   label: "5-Star Reviews"      },
+  { value: "100%",   label: "Insured & Licensed"  },
 ];
 
 const avatarSrcs = [
@@ -32,7 +32,7 @@ export default memo(function AboutHero() {
           {/* Left */}
           <div className="flex flex-col justify-center">
             <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} className="mb-6">
-              <span className="dot-badge">About RDM Enterprises</span>
+              <span className="dot-badge">About RDM enterprise</span>
             </motion.div>
 
             <div className="overflow-hidden mb-5">
@@ -42,9 +42,9 @@ export default memo(function AboutHero() {
                 transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="font-heading font-900 text-5xl md:text-6xl lg:text-[4rem] text-[#0D1D46] leading-[1.08]"
               >
-                Calgary's Most{" "}
+                We Don't Just{" "}
                 <span className="relative inline-block" style={{ color: "#DF5B10" }}>
-                  Trusted
+                  Move Boxes
                   <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 8" fill="none" preserveAspectRatio="none">
                     <motion.path
                       d="M2 6 C40 2, 80 7, 120 3 C160 -1, 185 5, 198 3"
@@ -54,8 +54,8 @@ export default memo(function AboutHero() {
                     />
                   </svg>
                 </span>
-                <br />Delivery &amp;{" "}
-                <span style={{ color: "#DF5B10" }}>Moving</span> Company
+                <br />We Move{" "}
+                <span style={{ color: "#DF5B10" }}>Lives Forward</span>
               </motion.h1>
             </div>
 
@@ -64,9 +64,9 @@ export default memo(function AboutHero() {
               transition={{ delay: 0.38, duration: 0.6 }}
               className="font-body text-[#0D1D46]/60 text-lg leading-relaxed mb-8 max-w-xl"
             >
-              Founded in 2016 with one truck and one promise. Today we're a full-service
-              moving company serving Calgary and surrounding Alberta communities. Licensed, insured, and
-              built entirely on word-of-mouth trust.
+              Every move carries weight , memories, milestones, fresh starts. We handle every job
+              with the care and precision it deserves, backed by a team Calgary has trusted for years.
+              Licensed, insured, and relentlessly reliable.
             </motion.p>
 
             <motion.div
