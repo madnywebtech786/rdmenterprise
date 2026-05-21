@@ -1,9 +1,17 @@
 import { Phone, Mail, MapPin, Truck } from "lucide-react";
-import FooterNewsletter from "./FooterNewsletter";
 
 function IconInstagram() {
   return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
       <circle cx="12" cy="12" r="4" />
       <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
@@ -13,7 +21,16 @@ function IconInstagram() {
 
 function IconFacebook() {
   return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
     </svg>
   );
@@ -29,39 +46,28 @@ function IconX() {
 
 const socials = [
   { Icon: IconInstagram, href: "#", label: "Instagram" },
-  { Icon: IconFacebook,  href: "#", label: "Facebook"  },
-  { Icon: IconX,         href: "#", label: "X"         },
+  { Icon: IconFacebook, href: "#", label: "Facebook" },
+  { Icon: IconX, href: "#", label: "X" },
 ];
 
 const links = {
-  Services: ["Delivery", "Moving Services", "Packing & Unpacking", "Office Move", "Junk Removal", "Hourly Labour"],
-  Company:  ["About Us", "Why Choose Us", "Service Areas", "Reviews", "Contact"],
+  Services: [
+    "Delivery",
+    "Moving Services",
+    "Packing & Unpacking",
+    "Office Move",
+    "Junk Removal",
+    "Hourly Labour",
+  ],
+  Company: ["About Us", "Why Choose Us", "Service Areas", "Reviews", "Contact"],
 };
 
 export default function Footer() {
   return (
     <footer className="bg-[#0D1D46] overflow-hidden">
-
-      {/* ── Newsletter strip ── */}
-      <div className="border-b border-white/10 py-10">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <h3 className="font-heading font-800 text-xl text-white mb-1">
-              Stay Updated with{" "}
-              <span style={{ color: "#DF5B10" }}>RDM News</span>
-            </h3>
-            <p className="font-body text-sm text-white/50">
-              Special offers, seasonal tips, and company updates.
-            </p>
-          </div>
-          <FooterNewsletter />
-        </div>
-      </div>
-
       {/* ── Main footer ── */}
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-
           {/* Brand column */}
           <div className="lg:col-span-2">
             {/* Logo */}
@@ -76,24 +82,35 @@ export default function Footer() {
                 <div className="font-heading font-900 text-lg text-white tracking-wide leading-tight">
                   RDM Enterprises
                 </div>
-                <div className="font-heading font-600 text-xs tracking-[0.2em] uppercase" style={{ color: "#DF5B10" }}>
+                <div
+                  className="font-heading font-600 text-xs tracking-[0.2em] uppercase"
+                  style={{ color: "#DF5B10" }}
+                >
                   Delivery Company
                 </div>
               </div>
             </div>
 
             <p className="font-body text-sm text-white/50 leading-relaxed mb-6 max-w-xs">
-              Professional delivery, moving, junk removal, and labour services
-              across the Greater Toronto Area. Reliable, insured, and ready
-              when you need us.
+              Professional moving, junk removal, and jobsite labour services
+              across Calgary and surrounding Alberta communities. Reliable,
+              insured, and ready when you need us.
             </p>
 
             {/* Contact links */}
             <div className="flex flex-col gap-3 mb-6">
               {[
-                { icon: Phone,  text: "+1 (647) 123-4567",      href: "tel:+16471234567" },
-                { icon: Mail,   text: "info@rdmenterprises.ca", href: "mailto:info@rdmenterprises.ca" },
-                { icon: MapPin, text: "Greater Toronto Area, ON", href: "#areas" },
+                {
+                  icon: Phone,
+                  text: "+1 (825) 583-5070",
+                  href: "tel:+18255835070",
+                },
+                {
+                  icon: Mail,
+                  text: "info@rdmenterprises.ca",
+                  href: "mailto:info@rdmenterprises.ca",
+                },
+                { icon: MapPin, text: "Calgary, Alberta", href: "#areas" },
               ].map((item) => {
                 const Icon = item.icon;
                 return (
@@ -102,7 +119,11 @@ export default function Footer() {
                     href={item.href}
                     className="flex items-center gap-3 text-sm text-white/50 hover:text-white transition-colors group"
                   >
-                    <Icon size={14} style={{ color: "#DF5B10" }} className="group-hover:scale-110 transition-transform duration-200" />
+                    <Icon
+                      size={14}
+                      style={{ color: "#DF5B10" }}
+                      className="group-hover:scale-110 transition-transform duration-200"
+                    />
                     {item.text}
                   </a>
                 );
@@ -156,7 +177,8 @@ export default function Footer() {
       <div className="border-t border-white/8 py-6">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="font-body text-xs text-white/30 text-center md:text-left">
-            © {new Date().getFullYear()} RDM Enterprises Delivery Company. All rights reserved.
+            © {new Date().getFullYear()} RDM Enterprises Delivery Company. All
+            rights reserved.
           </p>
           <div className="flex items-center gap-1 font-body text-xs text-white/30">
             <span>Built with</span>

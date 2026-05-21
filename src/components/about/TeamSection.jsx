@@ -27,6 +27,7 @@ const TeamCard = memo(function TeamCard({ member, delay }) {
           src={member.img} alt={member.name} fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 768px) 50vw, 25vw"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0D1D46]/80 via-[#0D1D46]/20 to-transparent" />
 

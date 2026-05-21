@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Star, Shield, ArrowRight, ChevronRight } from "lucide-react";
 
 const heroProof = [
-  { value: "8+",    label: "Years Serving GTA"    },
+  { value: "8+",    label: "Years Serving Calgary"  },
   { value: "5,000+",label: "Jobs Completed"        },
   { value: "98%",   label: "Client Satisfaction"   },
   { value: "500+",  label: "5-Star Reviews"        },
@@ -42,7 +42,7 @@ export default memo(function AboutHero() {
                 transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="font-heading font-900 text-5xl md:text-6xl lg:text-[4rem] text-[#0D1D46] leading-[1.08]"
               >
-                GTA's Most{" "}
+                Calgary's Most{" "}
                 <span className="relative inline-block" style={{ color: "#DF5B10" }}>
                   Trusted
                   <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 8" fill="none" preserveAspectRatio="none">
@@ -65,7 +65,7 @@ export default memo(function AboutHero() {
               className="font-body text-[#0D1D46]/60 text-lg leading-relaxed mb-8 max-w-xl"
             >
               Founded in 2016 with one truck and one promise. Today we're a full-service
-              logistics team serving 20+ cities across the GTA — licensed, insured, and
+              moving company serving Calgary and surrounding Alberta communities. Licensed, insured, and
               built entirely on word-of-mouth trust.
             </motion.p>
 
@@ -100,7 +100,7 @@ export default memo(function AboutHero() {
               <div className="flex -space-x-2.5">
                 {avatarSrcs.map((src, i) => (
                   <div key={i} className="w-9 h-9 rounded-full border-2 border-white overflow-hidden shadow-[0_2px_8px_rgba(13,29,70,0.15)]">
-                    <Image src={src} alt="customer" width={36} height={36} className="object-cover w-full h-full" />
+                    <Image src={src} alt="customer" width={36} height={36} className="object-cover w-full h-full" loading="lazy" />
                   </div>
                 ))}
               </div>
@@ -109,7 +109,7 @@ export default memo(function AboutHero() {
                   {[...Array(5)].map((_, i) => <Star key={i} size={11} fill="#DF5B10" stroke="none" />)}
                 </div>
                 <p className="font-body text-xs text-[#0D1D46]/50">
-                  Trusted by <strong className="text-[#0D1D46] font-700">5,000+ customers</strong> across the GTA
+                  Trusted by <strong className="text-[#0D1D46] font-700">5,000+ customers</strong> across Calgary
                 </p>
               </div>
             </motion.div>
@@ -127,7 +127,7 @@ export default memo(function AboutHero() {
               className="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-[0_32px_80px_rgba(13,29,70,0.18)]"
             >
               <Image
-                src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=900&q=80"
+                src="/images/about-page-hero.webp"
                 alt="RDM delivery professional at work" fill className="object-cover" sizes="50vw" priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0D1D46]/50 via-transparent to-transparent" />
@@ -139,7 +139,7 @@ export default memo(function AboutHero() {
               className="absolute -top-5 -left-5 bg-[#0D1D46] text-white rounded-2xl p-5 shadow-[0_8px_32px_rgba(13,29,70,0.3)]"
             >
               <div className="font-heading font-900 text-3xl leading-none" style={{ color: "#DF5B10" }}>2016</div>
-              <div className="font-body text-xs text-white/60 mt-1">Est. in Toronto</div>
+              <div className="font-body text-xs text-white/60 mt-1">Est. in Calgary</div>
             </motion.div>
 
             <motion.div

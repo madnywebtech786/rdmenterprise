@@ -25,7 +25,7 @@ const Counter = memo(function Counter({ value, suffix, label, icon: Icon, delay 
     >
       <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center
                       group-hover:bg-secondary group-hover:scale-110 transition-all duration-300">
-        <Icon size={20} style={{ color: "#DF5B10" }} className="group-hover:text-white transition-colors duration-300" />
+        <Icon size={20}  className="text-secondary group-hover:text-white transition-colors duration-300" />
       </div>
       <div className="font-heading font-900 text-5xl leading-none" style={{ color: "#DF5B10" }}>
         <motion.span>{disp}</motion.span>{suffix}

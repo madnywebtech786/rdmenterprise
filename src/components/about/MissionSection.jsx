@@ -8,7 +8,7 @@ import { Star, MapPin, CheckCircle2 } from "lucide-react";
 import { certifications } from "./data";
 
 const paragraphs = [
-  "RDM Enterprises was founded in 2016 with a single truck and an unwavering commitment to reliability. What started as a local GTA delivery service has grown into a full-service logistics company trusted by thousands of families and businesses.",
+  "RDM Enterprises was founded in 2016 with a single truck and an unwavering commitment to reliability. What started as a local Calgary moving company has grown into a full-service logistics company trusted by thousands of families and businesses.",
   "We don't just move boxes — we move lives. Whether you're relocating your home, clearing out clutter, or need a last-minute delivery, our team brings professionalism and genuine care to every single job.",
   "Every crew member is background-checked, trained, and held to the same standard we'd want when someone enters our own home.",
 ];
@@ -34,8 +34,9 @@ export default memo(function MissionSection() {
               className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-[0_24px_64px_rgba(13,29,70,0.15)]"
             >
               <Image
-                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&q=80"
+                src="/images/about-page-side.webp"
                 alt="RDM team at work" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw"
+                loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-[#0D1D46]/50 to-transparent" />
             </motion.div>
@@ -43,7 +44,7 @@ export default memo(function MissionSection() {
             <motion.div
               initial={{ opacity: 0, y: 20, x: 20 }} animate={inView ? { opacity: 1, y: 0, x: 0 } : {}}
               transition={{ delay: 0.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute -bottom-8 -right-8 bg-[#0D1D46] rounded-2xl p-5 shadow-xl text-white"
+              className="absolute -bottom-4 -right-4 sm:-bottom-8 sm:-right-8 bg-[#0D1D46] rounded-2xl p-3 sm:p-5 shadow-xl text-white"
             >
               <div className="font-heading font-900 text-3xl" style={{ color: "#DF5B10" }}>98%</div>
               <div className="font-body text-xs text-white/60 mt-0.5">Client Satisfaction</div>
@@ -55,11 +56,11 @@ export default memo(function MissionSection() {
             <motion.div
               initial={{ opacity: 0, scale: 0, rotate: 15 }} animate={inView ? { opacity: 1, scale: 1, rotate: 0 } : {}}
               transition={{ delay: 0.6, type: "spring", stiffness: 220, damping: 15 }}
-              className="absolute -top-6 -right-4 w-28 h-28 rounded-2xl bg-secondary
+              className="absolute -top-3 -right-2 sm:-top-6 sm:-right-4 w-20 h-20 sm:w-28 sm:h-28 rounded-2xl bg-secondary
                          flex flex-col items-center justify-center shadow-[0_8px_32px_rgba(223,91,16,0.45)]"
             >
               <MapPin size={22} className="text-white mb-1" />
-              <div className="font-heading font-800 text-white text-xs text-center leading-tight">GTA-Wide<br />Coverage</div>
+              <div className="font-heading font-800 text-white text-xs text-center leading-tight">Calgary<br />Coverage</div>
             </motion.div>
           </motion.div>
 

@@ -97,7 +97,7 @@ export default function About() {
               className="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-[0_24px_64px_rgba(13,29,70,0.15)]"
             >
               <Image
-                src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=900&q=80"
+                src="/images/about-side.webp"
                 alt="RDM delivery team"
                 fill
                 loading="lazy"
@@ -118,11 +118,11 @@ export default function About() {
               initial={{ opacity: 0, x: 30, y: 30 }}
               animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute -bottom-8 -right-8 w-52 h-52 rounded-2xl overflow-hidden border-4 border-white
+              className="absolute -bottom-4 -right-4 sm:-bottom-8 sm:-right-8 w-36 h-36 sm:w-52 sm:h-52 rounded-2xl overflow-hidden border-4 border-white
                          shadow-[0_16px_40px_rgba(13,29,70,0.2)] animate-float"
             >
               <Image
-                src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=400&q=80"
+                src="/images/about-bottom-right-side.webp"
                 alt="Moving boxes"
                 fill
                 loading="lazy"
@@ -136,7 +136,7 @@ export default function About() {
               initial={{ opacity: 0, scale: 0, rotate: -15 }}
               animate={inView ? { opacity: 1, scale: 1, rotate: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.55, type: "spring", stiffness: 200, damping: 15 }}
-              className="absolute -top-6 -left-6 w-32 h-32 rounded-2xl bg-[#DF5B10]/8 border border-[#DF5B10]/15
+              className="absolute -top-3 -left-3 sm:-top-6 sm:-left-6 w-20 h-20 sm:w-32 sm:h-32 rounded-2xl bg-[#DF5B10]/8 border border-[#DF5B10]/15
                          flex items-center justify-center"
             >
               <div className="w-16 h-16 rounded-xl bg-[#DF5B10]/12 flex items-center justify-center">

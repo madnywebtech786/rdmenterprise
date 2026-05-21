@@ -8,7 +8,7 @@ const reviews = [
   {
     name: "Sarah M.",
     role: "Homeowner",
-    location: "Toronto, ON",
+    location: "Calgary, AB",
     rating: 5,
     text: "RDM made our entire move completely stress-free. The team arrived on time, packed everything carefully, and had us settled into our new home faster than we expected. Absolutely recommend!",
     avatar: "SM",
@@ -17,7 +17,7 @@ const reviews = [
   {
     name: "James R.",
     role: "Business Owner",
-    location: "Mississauga, ON",
+    location: "Airdrie, AB",
     rating: 5,
     text: "We had an office relocation with tight deadlines and RDM delivered flawlessly. Zero downtime, everything organized, and the team was professional throughout. Will use again for sure.",
     avatar: "JR",
@@ -26,7 +26,7 @@ const reviews = [
   {
     name: "Priya K.",
     role: "Condo Resident",
-    location: "Vaughan, ON",
+    location: "Cochrane, AB",
     rating: 5,
     text: "I called for same-day junk removal and they were there within 2 hours. Quick, clean, and very reasonably priced. The guys were friendly and efficient. Great service!",
     avatar: "PK",
@@ -35,7 +35,7 @@ const reviews = [
   {
     name: "David L.",
     role: "Property Manager",
-    location: "Brampton, ON",
+    location: "Chestermere, AB",
     rating: 5,
     text: "We use RDM regularly for tenant move-outs and deliveries. Always reliable, always professional. They've never let us down across dozens of jobs. Our go-to logistics partner.",
     avatar: "DL",
@@ -44,7 +44,7 @@ const reviews = [
   {
     name: "Amanda T.",
     role: "Event Coordinator",
-    location: "North York, ON",
+    location: "Okotoks, AB",
     rating: 5,
     text: "Hired the hourly labour team to help with a large event setup. They worked quickly, followed instructions perfectly, and were genuinely great to work with. Highly recommended!",
     avatar: "AT",
@@ -53,7 +53,7 @@ const reviews = [
   {
     name: "Kevin O.",
     role: "First-time Mover",
-    location: "Scarborough, ON",
+    location: "Strathmore, AB",
     rating: 5,
     text: "Was nervous about my first big move but RDM made it so easy. They handled my fragile items with care, gave me a fair quote upfront, and everything arrived perfect. 10/10.",
     avatar: "KO",
@@ -117,7 +117,7 @@ function ReviewCard({ review, index }) {
         <div>
           <div className="font-heading font-700 text-sm text-[#0D1D46]">{review.name}</div>
           <div className="font-body text-xs text-[#0D1D46]/50">
-            {review.role} · {review.location}
+            {review.role}, {review.location}
           </div>
         </div>
       </div>

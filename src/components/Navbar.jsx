@@ -1,38 +1,50 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, Phone, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, ChevronDown, ChevronRight } from "lucide-react";
 
 const MotionLink = motion.create(Link);
 
+const movingSubServices = [
+  { label: "Packing & Unpacking", href: "/services/moving/packing"     },
+  { label: "Commercial Moving",   href: "/services/moving/commercial"  },
+  { label: "Residential Moving",  href: "/services/moving/residential" },
+  { label: "Office Moving",       href: "/services/moving/office"      },
+];
+
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+  { label: "Home",    href: "/" },
+  { label: "About",   href: "/about" },
   {
     label: "Services",
     href: "#services",
     children: [
-      { label: "Delivery",        href: "/services/delivery" },
-      { label: "Moving Services", href: "/services/moving"   },
-      { label: "Junk Removal",    href: "/services/junk"     },
-      { label: "Hourly Labour",   href: "/services/labour"   },
+      {
+        label: "Moving Services",
+        href: "/services/moving",
+        children: movingSubServices,
+      },
+      { label: "Junk Removal",   href: "/services/junk"      },
+      { label: "Jobsite Helper", href: "/services/labour"    },
+      { label: "Invest With Us", href: "/services/investors" },
     ],
   },
   { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
+  const [scrolled,           setScrolled]           = useState(false);
+  const [mobileOpen,         setMobileOpen]         = useState(false);
+  const [servicesOpen,       setServicesOpen]       = useState(false);
+  const [movingOpen,         setMovingOpen]         = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileMovingOpen,   setMobileMovingOpen]   = useState(false);
   const pathname = usePathname();
-
-  // Pages with a light hero need dark nav text before scrolling
-  const lightHero = pathname !== "/";
+  const movingTimerRef = useRef(null);
 
   function isActive(href) {
     if (href.startsWith("#")) return false;
@@ -46,6 +58,17 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  function handleMovingEnter() {
+    clearTimeout(movingTimerRef.current);
+    setMovingOpen(true);
+  }
+
+  function handleMovingLeave() {
+    movingTimerRef.current = setTimeout(() => setMovingOpen(false), 120);
+  }
+
+  const navTextClass = "text-[#0D1D46] hover:text-[#DF5B10] hover:bg-orange-50";
+
   return (
     <>
       <motion.header
@@ -55,38 +78,22 @@ export default function Navbar() {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
             ? "bg-white/95 backdrop-blur-md shadow-[0_2px_32px_rgba(13,29,70,0.1)] py-3"
-            : lightHero
-              ? "bg-white/80 backdrop-blur-sm py-5"
-              : "bg-transparent py-5"
+            : "bg-white/95 backdrop-blur-sm shadow-[0_2px_16px_rgba(13,29,70,0.06)] py-4"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+
           {/* Logo */}
-          <a href="#hero" className="flex items-center gap-3 group">
-            <div className="relative">
-              <div className="w-10 h-10 rounded-xl bg-[#0D1D46] flex items-center justify-center overflow-hidden">
-                <span
-                  className="font-heading font-900 text-lg leading-none"
-                  style={{ color: "#DF5B10" }}
-                >
-                  RDM
-                </span>
-              </div>
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#DF5B10] rounded-full border-2 border-white" />
-            </div>
-            <div className="flex flex-col leading-tight">
-              <span
-                className="font-heading font-800 text-sm tracking-widest uppercase"
-                style={{ color: "#0D1D46" }}
-              >
-                Enterprises
-              </span>
-              <span
-                className="font-heading font-600 text-[10px] tracking-[0.2em] uppercase"
-                style={{ color: "#DF5B10" }}
-              >
-                Delivery Company
-              </span>
+          <a href="/" className="flex items-center group">
+            <div className="bg-white rounded-md border border-surface-2 overflow-hidden w-30 h-16 flex items-center justify-center">
+              <Image
+                src="/images/logo.png"
+                alt="RDM Enterprises"
+                width={120}
+                height={120}
+                className="object-contain"
+                priority
+              />
             </div>
           </a>
 
@@ -98,23 +105,17 @@ export default function Navbar() {
                   key={link.label}
                   className="relative"
                   onMouseEnter={() => setServicesOpen(true)}
-                  onMouseLeave={() => setServicesOpen(false)}
+                  onMouseLeave={() => { setServicesOpen(false); setMovingOpen(false); }}
                 >
                   <button
                     className={`flex items-center gap-1 px-4 py-2 rounded-lg font-body font-500 text-sm transition-all duration-200 ${
-                      isActive(link.href)
-                        ? "bg-orange-50 text-[#DF5B10]"
-                        : scrolled || lightHero
-                          ? "text-[#0D1D46] hover:text-[#DF5B10] hover:bg-orange-50"
-                          : "text-white hover:text-[#DF5B10]"
+                      isActive(link.href) ? "bg-orange-50 text-secondary" : navTextClass
                     }`}
                   >
                     {link.label}
-                    <ChevronDown
-                      size={14}
-                      className={`transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`}
-                    />
+                    <ChevronDown size={14} className={`transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`} />
                   </button>
+
                   <AnimatePresence>
                     {servicesOpen && (
                       <motion.div
@@ -122,20 +123,67 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 8, scale: 0.97 }}
                         transition={{ duration: 0.18 }}
-                        className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-[0_8px_32px_rgba(13,29,70,0.12)] border border-[#e8e4dd] overflow-hidden"
+                        className="absolute top-full left-0 mt-2 w-60 bg-white rounded-md shadow-[0_8px_32px_rgba(13,29,70,0.12)] border border-surface-2 overflow-hidden py-1"
                       >
-                        {link.children.map((child) => (
-                          <Link
-                            key={child.label}
-                            href={child.href}
-                            className="flex items-center gap-2 px-4 py-3 text-sm font-body font-500 text-[#0D1D46] hover:bg-orange-50 hover:text-[#DF5B10] transition-colors border-b border-[#f0ede8] last:border-0 group"
-                          >
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#DF5B10] opacity-0 group-hover:opacity-100 transition-opacity" />
-                            {child.label}
-                          </Link>
-                        ))}
+                        {link.children.map((child) =>
+                          child.children ? (
+                            /* Moving Services — trigger only, flyout rendered as sibling below */
+                            <div
+                              key={child.label}
+                              onMouseEnter={handleMovingEnter}
+                              onMouseLeave={handleMovingLeave}
+                              className={`flex items-center justify-between px-4 py-3 text-sm font-body font-500 text-[#0D1D46] transition-colors border-b border-surface cursor-pointer group ${movingOpen ? "bg-orange-50 text-secondary" : "hover:bg-orange-50 hover:text-secondary"}`}
+                            >
+                              <span className="flex items-center gap-2">
+                                <span className={`w-1.5 h-1.5 rounded-full bg-secondary transition-opacity ${movingOpen ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`} />
+                                {child.label}
+                              </span>
+                              <ChevronRight size={12} className={`transition-colors ${movingOpen ? "text-secondary" : "text-[#0D1D46]/40 group-hover:text-secondary"}`} />
+                            </div>
+                          ) : (
+                            <Link
+                              key={child.label}
+                              href={child.href}
+                              className="flex items-center gap-2 px-4 py-3 text-sm font-body font-500 text-[#0D1D46] hover:bg-orange-50 hover:text-secondary transition-colors border-b border-surface last:border-0 group"
+                            >
+                              <span className="w-1.5 h-1.5 rounded-full bg-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
+                              {child.label}
+                            </Link>
+                          )
+                        )}
                       </motion.div>
                     )}
+                  </AnimatePresence>
+
+                  {/* Moving Services flyout — sibling of main dropdown, outside overflow-hidden */}
+                  <AnimatePresence>
+                    {servicesOpen && movingOpen && (() => {
+                      const movingChild = link.children.find(c => c.children);
+                      return movingChild ? (
+                        <motion.div
+                          key="moving-flyout"
+                          initial={{ opacity: 0, x: -6, scale: 0.97 }}
+                          animate={{ opacity: 1, x: 0, scale: 1 }}
+                          exit={{ opacity: 0, x: -6, scale: 0.97 }}
+                          transition={{ duration: 0.15 }}
+                          onMouseEnter={handleMovingEnter}
+                          onMouseLeave={handleMovingLeave}
+                          className="absolute w-56 bg-white rounded-md shadow-[0_8px_32px_rgba(13,29,70,0.12)] border border-surface-2 overflow-hidden py-1"
+                          style={{ top: "calc(100% + 12px)", left: "calc(15rem + 4px)" }}
+                        >
+                          {movingChild.children.map((sub) => (
+                            <Link
+                              key={sub.label}
+                              href={sub.href}
+                              className="flex items-center gap-2 px-4 py-2.5 text-sm font-body font-500 text-[#0D1D46] hover:bg-orange-50 hover:text-secondary transition-colors border-b border-surface last:border-0 group"
+                            >
+                              <span className="w-1.5 h-1.5 rounded-full bg-secondary opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+                              {sub.label}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      ) : null;
+                    })()}
                   </AnimatePresence>
                 </div>
               ) : link.href.startsWith("/") ? (
@@ -143,11 +191,7 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   className={`px-4 py-2 rounded-lg font-body font-500 text-sm transition-all duration-200 ${
-                    isActive(link.href)
-                      ? "bg-orange-50 text-[#DF5B10]"
-                      : scrolled || lightHero
-                        ? "text-[#0D1D46] hover:text-[#DF5B10] hover:bg-orange-50"
-                        : "text-white hover:text-[#DF5B10]"
+                    isActive(link.href) ? "bg-orange-50 text-secondary" : navTextClass
                   }`}
                 >
                   {link.label}
@@ -157,11 +201,7 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   className={`px-4 py-2 rounded-lg font-body font-500 text-sm transition-all duration-200 ${
-                    isActive(link.href)
-                      ? "bg-orange-50 text-[#DF5B10]"
-                      : scrolled || lightHero
-                        ? "text-[#0D1D46] hover:text-[#DF5B10] hover:bg-orange-50"
-                        : "text-white hover:text-[#DF5B10]"
+                    isActive(link.href) ? "bg-orange-50 text-secondary" : navTextClass
                   }`}
                 >
                   {link.label}
@@ -170,10 +210,10 @@ export default function Navbar() {
             )}
           </nav>
 
-          {/* CTA */}
+          {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <a
-              href="tel:+16471234567"
+              href="tel:+18255835070"
               className="flex items-center gap-2 px-4 py-2 rounded-full border border-[#DF5B10]/30 text-[#DF5B10] font-body font-600 text-sm hover:bg-[#DF5B10]/5 transition-colors"
             >
               <Phone size={14} />
@@ -189,10 +229,9 @@ export default function Navbar() {
 
           {/* Mobile Toggle */}
           <button
-            className={`lg:hidden p-2 rounded-lg transition-colors ${
-              scrolled || lightHero ? "text-[#0D1D46]" : "text-white"
-            }`}
+            className="lg:hidden p-2 rounded-lg transition-colors text-[#0D1D46]"
             onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -207,8 +246,24 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-[#0D1D46] flex flex-col pt-24 px-6 pb-8 overflow-y-auto"
+            className="fixed inset-0 z-60 bg-[#0D1D46] flex flex-col px-6 pb-8 overflow-y-auto"
           >
+            {/* Drawer header */}
+            <div className="flex items-center justify-between py-4 mb-4">
+              <a href="/" onClick={() => setMobileOpen(false)}>
+                <div className="bg-white rounded-md border border-white/20 overflow-hidden w-26 h-14 flex items-center justify-center">
+                  <Image src="/images/logo.png" alt="RDM Enterprises" width={52} height={52} className="object-contain" loading="lazy" />
+                </div>
+              </a>
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="p-2 rounded-lg text-white hover:bg-white/10 transition-colors"
+                aria-label="Close menu"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
             <nav className="flex flex-col gap-1">
               {navLinks.map((link, i) =>
                 link.children ? (
@@ -219,16 +274,15 @@ export default function Navbar() {
                     transition={{ delay: i * 0.06 + 0.1 }}
                     className="border-b border-white/5"
                   >
+                    {/* Services accordion */}
                     <button
                       onClick={() => setMobileServicesOpen((o) => !o)}
                       className="w-full flex items-center justify-between px-4 py-4 rounded-xl font-heading font-700 text-xl text-white hover:text-secondary hover:bg-white/5 transition-colors"
                     >
                       {link.label}
-                      <ChevronDown
-                        size={18}
-                        className={`transition-transform duration-300 ${mobileServicesOpen ? "rotate-180 text-secondary" : ""}`}
-                      />
+                      <ChevronDown size={18} className={`transition-transform duration-300 ${mobileServicesOpen ? "rotate-180 text-secondary" : ""}`} />
                     </button>
+
                     <AnimatePresence initial={false}>
                       {mobileServicesOpen && (
                         <motion.div
@@ -239,17 +293,57 @@ export default function Navbar() {
                           className="overflow-hidden"
                         >
                           <div className="flex flex-col gap-1 pb-2 pl-4">
-                            {link.children.map((child) => (
-                              <Link
-                                key={child.label}
-                                href={child.href}
-                                onClick={() => setMobileOpen(false)}
-                                className="flex items-center gap-2 px-4 py-3 rounded-xl font-heading font-600 text-base text-white/70 hover:text-secondary hover:bg-white/5 transition-colors"
-                              >
-                                <span className="w-1.5 h-1.5 rounded-full bg-secondary/60 shrink-0" />
-                                {child.label}
-                              </Link>
-                            ))}
+                            {link.children.map((child) =>
+                              child.children ? (
+                                /* Moving Services nested accordion */
+                                <div key={child.label} className="border-b border-white/5 last:border-0">
+                                  <button
+                                    onClick={() => setMobileMovingOpen((o) => !o)}
+                                    className="w-full flex items-center justify-between px-4 py-3 rounded-xl font-heading font-600 text-base text-white/70 hover:text-secondary hover:bg-white/5 transition-colors"
+                                  >
+                                    <span className="flex items-center gap-2">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-secondary/60 shrink-0" />
+                                      {child.label}
+                                    </span>
+                                    <ChevronDown size={14} className={`transition-transform duration-300 ${mobileMovingOpen ? "rotate-180 text-secondary" : "text-white/30"}`} />
+                                  </button>
+
+                                  <AnimatePresence initial={false}>
+                                    {mobileMovingOpen && (
+                                      <motion.div
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: "auto", opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        transition={{ duration: 0.22 }}
+                                        className="overflow-hidden pl-4"
+                                      >
+                                        {child.children.map((sub) => (
+                                          <Link
+                                            key={sub.label}
+                                            href={sub.href}
+                                            onClick={() => setMobileOpen(false)}
+                                            className="flex items-center gap-2 px-4 py-2.5 rounded-xl font-heading font-500 text-sm text-white/50 hover:text-secondary hover:bg-white/5 transition-colors"
+                                          >
+                                            <span className="w-1 h-1 rounded-full bg-secondary/40 shrink-0" />
+                                            {sub.label}
+                                          </Link>
+                                        ))}
+                                      </motion.div>
+                                    )}
+                                  </AnimatePresence>
+                                </div>
+                              ) : (
+                                <Link
+                                  key={child.label}
+                                  href={child.href}
+                                  onClick={() => setMobileOpen(false)}
+                                  className="flex items-center gap-2 px-4 py-3 rounded-xl font-heading font-600 text-base text-white/70 hover:text-secondary hover:bg-white/5 transition-colors"
+                                >
+                                  <span className="w-1.5 h-1.5 rounded-full bg-secondary/60 shrink-0" />
+                                  {child.label}
+                                </Link>
+                              )
+                            )}
                           </div>
                         </motion.div>
                       )}
@@ -282,13 +376,14 @@ export default function Navbar() {
                 )
               )}
             </nav>
+
             <div className="mt-auto flex flex-col gap-3 pt-8">
               <a
-                href="tel:+16471234567"
+                href="tel:+18255835070"
                 className="flex items-center justify-center gap-2 py-4 rounded-xl bg-white/10 text-white font-heading font-700 text-lg"
               >
                 <Phone size={18} />
-                Call Now
+                +1 (825) 583-5070
               </a>
               <Link
                 href="/contact"

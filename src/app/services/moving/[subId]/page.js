@@ -1,40 +1,40 @@
 import { notFound } from "next/navigation";
-import { services, getServiceById } from "@/data/services";
+import { movingSubServices, getMovingSubServiceById, services } from "@/data/services";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ServiceDetailPage from "@/components/service-detail";
 
 export function generateStaticParams() {
-  return services.map((s) => ({ id: s.id }));
+  return movingSubServices.map((s) => ({ subId: s.id }));
 }
 
 const BASE_URL = "https://www.rdmenterprises.ca";
 
 export async function generateMetadata({ params }) {
-  const { id } = await params;
-  const svc = getServiceById(id);
+  const { subId } = await params;
+  const svc = getMovingSubServiceById(subId);
   if (!svc) return {};
   return {
-    title: `${svc.title} in Calgary, AB | RDM Enterprises`,
+    title: `${svc.title} in Calgary | RDM Enterprises`,
     description: svc.descriptionShort,
     keywords: [
       `${svc.title.toLowerCase()} Calgary`,
       `Calgary ${svc.title.toLowerCase()}`,
-      `${svc.title.toLowerCase()} Calgary AB`,
-      "RDM Enterprises Calgary",
       "moving company Calgary",
+      "RDM Enterprises",
+      "Calgary movers",
       "Airdrie movers",
       "Cochrane movers",
       "Chestermere movers",
       "Okotoks movers",
-    ],
-    alternates: { canonical: `${BASE_URL}/services/${svc.id}` },
+    ].join(", "),
+    alternates: { canonical: `${BASE_URL}/services/moving/${svc.id}` },
     openGraph: {
       title: `${svc.title} in Calgary – RDM Enterprises`,
       description: svc.descriptionShort,
-      url: `${BASE_URL}/services/${svc.id}`,
-      images: [{ url: svc.image, width: 1200, height: 800, alt: `${svc.title} – RDM Enterprises Calgary` }],
+      url: `${BASE_URL}/services/moving/${svc.id}`,
+      images: [{ url: svc.image, width: 1200, height: 800, alt: svc.title }],
     },
     twitter: {
       card: "summary_large_image",
@@ -46,8 +46,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-  const { id } = await params;
-  const svc = getServiceById(id);
+  const { subId } = await params;
+  const svc = getMovingSubServiceById(subId);
   if (!svc) notFound();
 
   return (

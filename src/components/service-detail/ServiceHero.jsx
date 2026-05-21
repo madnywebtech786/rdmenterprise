@@ -8,8 +8,8 @@ import { ArrowRight, Phone, CheckCircle2, Star } from "lucide-react";
 export default memo(function ServiceHero({ svc }) {
   return (
     <section className="relative bg-[#0D1D46] overflow-hidden pt-28 pb-0 min-h-[70vh] flex flex-col">
-      <div className="absolute -top-32 -right-32 w-[560px] h-[560px] rounded-full bg-[#DF5B10]/10 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-white/3 blur-3xl pointer-events-none" />
+      <div className="absolute -top-32 -right-32 w-140 h-140 rounded-full bg-secondary/10 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-100 h-100 rounded-full bg-white/3 blur-3xl pointer-events-none" />
       <div className="absolute inset-0 pointer-events-none opacity-15"
         style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px)", backgroundSize: "28px 28px" }}
       />
@@ -27,8 +27,14 @@ export default memo(function ServiceHero({ svc }) {
               <a href="/" className="hover:text-white/60 transition-colors">Home</a>
               <span>/</span>
               <a href="/#services" className="hover:text-white/60 transition-colors">Services</a>
+              {svc.parentId && (
+                <>
+                  <span>/</span>
+                  <a href={`/services/${svc.parentId}`} className="hover:text-white/60 transition-colors">Moving Services</a>
+                </>
+              )}
               <span>/</span>
-              <span className="text-[#DF5B10]">{svc.title}</span>
+              <span className="text-secondary">{svc.title}</span>
             </motion.div>
 
             <motion.div
@@ -38,7 +44,7 @@ export default memo(function ServiceHero({ svc }) {
             >
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15
                                bg-white/8 font-body font-600 text-xs tracking-widest uppercase text-white/60">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#DF5B10] animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
                 {svc.subtitle}
               </span>
             </motion.div>
@@ -88,14 +94,14 @@ export default memo(function ServiceHero({ svc }) {
             >
               <a
                 href="/#contact"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#DF5B10] text-white
-                           font-heading font-700 text-sm tracking-wide hover:bg-[#f06d20] transition-all duration-300
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-secondary text-white
+                           font-heading font-700 text-sm tracking-wide hover:bg-secondary-light transition-all duration-300
                            shadow-[0_8px_32px_rgba(223,91,16,0.4)] hover:-translate-y-0.5"
               >
                 Get a Free Quote <ArrowRight size={15} />
               </a>
               <a
-                href="tel:+16471234567"
+                href="tel:+18255835070"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/20
                            text-white font-heading font-700 text-sm hover:bg-white/8 transition-all duration-300"
               >
@@ -113,16 +119,16 @@ export default memo(function ServiceHero({ svc }) {
             <motion.div
               initial={{ clipPath: "inset(100% 0 0 0)" }} animate={{ clipPath: "inset(0% 0 0 0)" }}
               transition={{ duration: 0.95, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-[0_32px_80px_rgba(0,0,0,0.35)]"
+              className="relative rounded-3xl overflow-hidden aspect-4/3 shadow-[0_32px_80px_rgba(0,0,0,0.35)]"
             >
               <Image src={svc.image} alt={svc.title} fill className="object-cover" sizes="50vw" priority />
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#0D1D46]/50 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-tr from-[#0D1D46]/50 to-transparent" />
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, scale: 0, rotate: -12 }} animate={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={{ delay: 0.65, type: "spring", stiffness: 220, damping: 16 }}
-              className="absolute -bottom-5 -left-5 w-20 h-20 rounded-2xl bg-[#DF5B10]
+              className="absolute -bottom-5 -left-5 w-20 h-20 rounded-2xl bg-secondary
                          flex items-center justify-center shadow-[0_8px_32px_rgba(223,91,16,0.45)]"
             >
               <span className="font-heading font-900 text-3xl text-white leading-none">{svc.num}</span>

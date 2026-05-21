@@ -9,9 +9,9 @@ import {
 import ServiceSelect from "./ServiceSelect";
 
 const contactInfo = [
-  { icon: Phone,  label: "Phone",        value: "+1 (647) 123-4567",      href: "tel:+16471234567" },
+  { icon: Phone,  label: "Phone",        value: "+1 (825) 583-5070",      href: "tel:+18255835070" },
   { icon: Mail,   label: "Email",        value: "info@rdmenterprises.ca", href: "mailto:info@rdmenterprises.ca" },
-  { icon: MapPin, label: "Service Area", value: "Greater Toronto Area",   href: "#areas" },
+  { icon: MapPin, label: "Service Area", value: "Calgary & Surrounding",  href: "#areas" },
   { icon: Clock,  label: "Hours",        value: "Mon to Sat: 7am to 9pm", href: null },
 ];
 

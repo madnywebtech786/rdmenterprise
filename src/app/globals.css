@@ -371,6 +371,81 @@ body {
   to   { filter: blur(0);   opacity: 1; }
 }
 
+/* ─── Hero slide content CSS animations ─── */
+@keyframes slide-badge-in {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-line-up {
+  from { transform: translateY(110%); }
+  to   { transform: translateY(0); }
+}
+@keyframes slide-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slide-img-in {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-card-left {
+  from { opacity: 0; transform: translateX(-24px) translateY(-10px); }
+  to   { opacity: 1; transform: translateX(0) translateY(0); }
+}
+@keyframes slide-card-right {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-card-bottom {
+  from { opacity: 0; transform: translate(-50%, 24px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* Hide all slide content on inactive slides */
+.hero-slide-badge,
+.hero-slide-desc,
+.hero-slide-ctas,
+.hero-slide-stats,
+.hero-slide-img,
+.hero-slide-card-l,
+.hero-slide-card-r,
+.hero-slide-card-b { opacity: 0; }
+
+/* Headlines: hidden via translateY (clip handles visibility, not opacity) */
+.hero-slide-line { transform: translateY(110%); }
+
+/* Animations fire only on the active slide */
+.swiper-slide-active .hero-slide-badge  { animation: slide-badge-in   0.5s cubic-bezier(0.16,1,0.3,1) 0.1s  both; }
+.swiper-slide-active .hero-slide-line-1 { animation: slide-line-up    0.9s cubic-bezier(0.16,1,0.3,1) 0.25s both; }
+.swiper-slide-active .hero-slide-line-2 { animation: slide-line-up    0.9s cubic-bezier(0.16,1,0.3,1) 0.38s both; }
+.swiper-slide-active .hero-slide-line-3 { animation: slide-line-up    0.9s cubic-bezier(0.16,1,0.3,1) 0.51s both; }
+.swiper-slide-active .hero-slide-desc   { animation: slide-fade-up    0.6s cubic-bezier(0.16,1,0.3,1) 0.7s  both; }
+.swiper-slide-active .hero-slide-ctas   { animation: slide-fade-up    0.5s cubic-bezier(0.16,1,0.3,1) 0.85s both; }
+.swiper-slide-active .hero-slide-stats  { animation: slide-fade-in    0.6s ease                        1.05s both; }
+.swiper-slide-active .hero-slide-img    { animation: slide-img-in     1s   cubic-bezier(0.16,1,0.3,1) 0.3s  both; }
+.swiper-slide-active .hero-slide-card-l { animation: slide-card-left  0.6s cubic-bezier(0.16,1,0.3,1) 1.1s  both; }
+.swiper-slide-active .hero-slide-card-r { animation: slide-card-right 0.6s cubic-bezier(0.16,1,0.3,1) 1.2s  both; }
+.swiper-slide-active .hero-slide-card-b { animation: slide-card-bottom 0.6s cubic-bezier(0.16,1,0.3,1) 1.3s both; }
+
+/* ─── Swiper hero pagination ─── */
+.hero-pagination .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: rgba(255,255,255,0.3);
+  opacity: 1;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+.hero-pagination .swiper-pagination-bullet-active {
+  background: #DF5B10;
+  width: 24px;
+  border-radius: 9999px;
+}
+
 /* ─── Performance hints ─── */
 .motion-safe {
   will-change: transform, opacity;

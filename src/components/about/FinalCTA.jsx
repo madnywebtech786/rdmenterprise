@@ -5,9 +5,9 @@ import { motion, useInView } from "motion/react";
 import { ArrowRight, Phone, Mail, MapPin } from "lucide-react";
 
 const contactItems = [
-  { icon: Phone,  text: "+1 (647) 123-4567"       },
+  { icon: Phone,  text: "+1 (825) 583-5070"        },
   { icon: Mail,   text: "info@rdmenterprises.ca"   },
-  { icon: MapPin, text: "Greater Toronto Area, ON" },
+  { icon: MapPin, text: "Calgary, AB & Surrounding" },
 ];
 
 export default memo(function FinalCTA() {

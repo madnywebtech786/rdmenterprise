@@ -2,16 +2,17 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ChevronDown, Check, Truck, PackageOpen, Archive, Building2, Trash2, HardHat, MessageCircle } from "lucide-react";
+import { ChevronDown, Check, PackageOpen, Archive, Building2, Trash2, HardHat, MessageCircle, Home, Briefcase, TrendingUp } from "lucide-react";
 
 const OPTIONS = [
-  { value: "Delivery",              label: "Delivery",             Icon: Truck          },
-  { value: "Moving Services",       label: "Moving Services",      Icon: PackageOpen    },
-  { value: "Packing and Unpacking", label: "Packing & Unpacking",  Icon: Archive        },
-  { value: "Office Move",           label: "Office Move",          Icon: Building2      },
-  { value: "Junk Removal",          label: "Junk Removal",         Icon: Trash2         },
-  { value: "Hourly Labour",         label: "Hourly Labour",        Icon: HardHat        },
-  { value: "Other",                 label: "Other",                Icon: MessageCircle  },
+  { value: "Residential Moving",   label: "Residential Moving",   Icon: Home         },
+  { value: "Commercial Moving",    label: "Commercial Moving",    Icon: Briefcase    },
+  { value: "Packing & Unpacking",  label: "Packing & Unpacking",  Icon: Archive      },
+  { value: "Office Moving",        label: "Office Moving",        Icon: Building2    },
+  { value: "Junk Removal",         label: "Junk Removal",         Icon: Trash2       },
+  { value: "Jobsite Labour",       label: "Jobsite Labour",       Icon: HardHat      },
+  { value: "Investor Relations",   label: "Investor Relations",   Icon: TrendingUp   },
+  { value: "Other",                label: "Other",                Icon: MessageCircle },
 ];
 
 export default function ServiceSelect({ value, onChange, required }) {
@@ -82,11 +83,11 @@ export default function ServiceSelect({ value, onChange, required }) {
         aria-label="Select a service"
         onKeyDown={onKeyDown}
         onClick={() => { setOpen((o) => !o); setFocused(selected ? OPTIONS.indexOf(selected) : 0); }}
-        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl border bg-[#f8f7f4] font-body text-sm
+        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl border bg-bg font-body text-sm
                     transition-all duration-200 text-left outline-none
                     ${open
                       ? "border-secondary ring-2 ring-secondary/10"
-                      : "border-[#e8e4dd] hover:border-[#0D1D46]/25 focus:border-secondary focus:ring-2 focus:ring-secondary/10"
+                      : "border-surface-2 hover:border-[#0D1D46]/25 focus:border-secondary focus:ring-2 focus:ring-secondary/10"
                     }`}
       >
         {selected ? (
@@ -119,7 +120,7 @@ export default function ServiceSelect({ value, onChange, required }) {
             transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
             style={{ transformOrigin: "top" }}
             className="absolute z-50 top-[calc(100%+6px)] left-0 right-0
-                       bg-white border border-[#e8e4dd] rounded-xl
+                       bg-white border border-surface-2 rounded-xl
                        shadow-[0_8px_32px_rgba(13,29,70,0.12)]
                        overflow-hidden py-1.5"
           >
@@ -135,7 +136,7 @@ export default function ServiceSelect({ value, onChange, required }) {
                   onMouseLeave={() => setFocused(-1)}
                   onClick={() => pick(opt.value)}
                   className={`flex items-center gap-3 px-4 py-2.5 cursor-pointer select-none transition-colors duration-100
-                              ${isFocused ? "bg-[#f8f7f4]" : ""}
+                              ${isFocused ? "bg-bg" : ""}
                               ${isSelected ? "bg-secondary/5" : ""}`}
                 >
                   <opt.Icon size={15} className={`shrink-0 ${isSelected ? "text-secondary" : "text-[#0D1D46]/40"}`} />

@@ -15,44 +15,68 @@ function ServicePanel({ service, isActive, onClick, progress }) {
       onClick={onClick}
       className={`w-full text-left group relative flex items-center gap-4 px-5 py-5 rounded-2xl border
                   transition-all duration-300 flex-1 ${
-        isActive
-          ? "bg-[#0D1D46] border-[#DF5B10]/40 shadow-[0_4px_24px_rgba(13,29,70,0.2)]"
-          : "bg-white border-[#e8e4dd] hover:border-[#0D1D46]/20 hover:bg-[#f8f7f4]"
-      }`}
+                    isActive
+                      ? "bg-[#0D1D46] border-[#DF5B10]/40 shadow-[0_4px_24px_rgba(13,29,70,0.2)]"
+                      : "bg-white border-[#e8e4dd] hover:border-[#0D1D46]/20 hover:bg-[#f8f7f4]"
+                  }`}
     >
       {/* Icon */}
-      <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 ${
-        isActive ? "bg-[#DF5B10] shadow-[0_4px_16px_rgba(223,91,16,0.4)]" : "bg-[#f0ede8] group-hover:bg-[#DF5B10]/10"
-      }`}>
-        <Icon size={20} className={isActive ? "text-white" : "text-[#DF5B10]"} />
+      <div
+        className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 ${
+          isActive
+            ? "bg-[#DF5B10] shadow-[0_4px_16px_rgba(223,91,16,0.4)]"
+            : "bg-[#f0ede8] group-hover:bg-[#DF5B10]/10"
+        }`}
+      >
+        <Icon
+          size={20}
+          className={isActive ? "text-white" : "text-[#DF5B10]"}
+        />
       </div>
 
       {/* Text */}
       <div className="flex-1 min-w-0">
-        <div className={`font-heading font-800 text-xl leading-tight ${isActive ? "text-white" : "text-[#0D1D46]"}`}>
+        <div
+          className={`font-heading font-800 text-xl leading-tight ${isActive ? "text-white" : "text-[#0D1D46]"}`}
+        >
           {service.title}
         </div>
-        <div className={`font-body text-base mt-1 ${isActive ? "text-white/45" : "text-[#0D1D46]/40"}`}>
+        <div
+          className={`font-body text-base mt-1 ${isActive ? "text-white/45" : "text-[#0D1D46]/40"}`}
+        >
           {service.subtitle}
         </div>
       </div>
 
       {/* Number + arrow */}
       <div className="flex flex-col items-end gap-2 shrink-0">
-        <span className={`font-heading font-900 text-sm tracking-widest ${isActive ? "text-[#DF5B10]" : "text-[#0D1D46]/20"}`}>
+        <span
+          className={`font-heading font-900 text-sm tracking-widest ${isActive ? "text-[#DF5B10]" : "text-[#0D1D46]/20"}`}
+        >
           {service.num}
         </span>
-        <div className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${
-          isActive ? "bg-[#DF5B10]/20" : "bg-[#f0ede8] group-hover:bg-[#DF5B10]/10"
-        }`}>
-          <ArrowUpRight size={13} className={`transition-all duration-300 ${
-            isActive ? "text-[#DF5B10]" : "text-[#0D1D46]/30 -rotate-45 group-hover:rotate-0 group-hover:text-[#DF5B10]"
-          }`} />
+        <div
+          className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${
+            isActive
+              ? "bg-[#DF5B10]/20"
+              : "bg-[#f0ede8] group-hover:bg-[#DF5B10]/10"
+          }`}
+        >
+          <ArrowUpRight
+            size={13}
+            className={`transition-all duration-300 ${
+              isActive
+                ? "text-[#DF5B10]"
+                : "text-[#0D1D46]/30 -rotate-45 group-hover:rotate-0 group-hover:text-[#DF5B10]"
+            }`}
+          />
         </div>
       </div>
 
       {/* Active left border */}
-      {isActive && <div className="absolute left-0 top-3 bottom-3 w-0.5 rounded-full bg-[#DF5B10]" />}
+      {isActive && (
+        <div className="absolute left-0 top-3 bottom-3 w-0.5 rounded-full bg-[#DF5B10]" />
+      )}
 
       {/* Progress bar at bottom */}
       {isActive && (
@@ -78,7 +102,11 @@ function FeatureChip({ f, i, active }) {
       key={`${active}-${f}`}
       initial={{ opacity: 0, scale: 0.85, y: 8 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.35, delay: 0.15 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+      transition={{
+        duration: 0.35,
+        delay: 0.15 + i * 0.06,
+        ease: [0.16, 1, 0.3, 1],
+      }}
       className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#f8f7f4] border border-[#e8e4dd]"
     >
       <CheckCircle2 size={12} style={{ color: "#DF5B10" }} />
@@ -89,7 +117,7 @@ function FeatureChip({ f, i, active }) {
 
 export default function Services() {
   const [active, setActive] = useState(0);
-  const ref    = useRef(null);
+  const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const current = services[active];
 
@@ -101,17 +129,24 @@ export default function Services() {
   }, []);
 
   return (
-    <section id="services" className="section-padding bg-[#f8f7f4] overflow-hidden relative">
+    <section
+      id="services"
+      className="section-padding bg-[#f8f7f4] overflow-hidden relative"
+    >
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{ backgroundImage: `radial-gradient(circle at 80% 20%, rgba(223,91,16,0.04) 0%, transparent 60%)` }}
+        style={{
+          backgroundImage: `radial-gradient(circle at 80% 20%, rgba(223,91,16,0.04) 0%, transparent 60%)`,
+        }}
       />
 
       <div ref={ref} className="max-w-7xl mx-auto px-6">
-
         {/* Header */}
         <div className="mb-14">
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+          >
             <span className="dot-badge mb-5 inline-flex">What We Do</span>
           </motion.div>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -121,9 +156,9 @@ export default function Services() {
               transition={{ delay: 0.1 }}
               className="font-heading font-900 text-4xl md:text-5xl text-[#0D1D46] leading-tight"
             >
-              Complete{" "}
-              <span style={{ color: "#DF5B10" }}>Logistics</span>
-              <br />Solutions
+              Complete <span style={{ color: "#DF5B10" }}>Logistics</span>
+              <br />
+              Solutions
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 16 }}
@@ -131,7 +166,8 @@ export default function Services() {
               transition={{ delay: 0.2 }}
               className="font-body text-[#0D1D46]/55 text-base max-w-xs leading-relaxed"
             >
-              From quick deliveries to full-scale office relocations. One company, every job.
+              From quick deliveries to full-scale office relocations. One
+              company, every job.
             </motion.p>
           </div>
         </div>
@@ -163,22 +199,44 @@ export default function Services() {
                         className="h-full bg-[#DF5B10] rounded-full"
                         initial={{ scaleX: 0, originX: 0 }}
                         animate={{ scaleX: 1 }}
-                        transition={{ duration: CYCLE_DURATION / 1000, ease: "linear" }}
+                        transition={{
+                          duration: CYCLE_DURATION / 1000,
+                          ease: "linear",
+                        }}
                         key={active}
                         style={{ transformOrigin: "left" }}
                       />
                     </div>
                   )}
-                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 ${
-                    isActive ? "bg-[#DF5B10] shadow-[0_4px_12px_rgba(223,91,16,0.4)]" : "bg-[#f0ede8]"
-                  }`}>
-                    <Icon size={16} className={isActive ? "text-white" : "text-[#DF5B10]"} />
+                  <div
+                    className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                      isActive
+                        ? "bg-[#DF5B10] shadow-[0_4px_12px_rgba(223,91,16,0.4)]"
+                        : "bg-[#f0ede8]"
+                    }`}
+                  >
+                    <Icon
+                      size={16}
+                      className={isActive ? "text-white" : "text-[#DF5B10]"}
+                    />
                   </div>
                   <div className="text-center">
-                    <div className={`font-heading font-800 text-xs leading-tight ${isActive ? "text-white" : "text-[#0D1D46]"}`}>{s.title}</div>
-                    <div className={`font-body text-[10px] mt-0.5 ${isActive ? "text-white/40" : "text-[#0D1D46]/35"}`}>{s.subtitle}</div>
+                    <div
+                      className={`font-heading font-800 text-xs leading-tight ${isActive ? "text-white" : "text-[#0D1D46]"}`}
+                    >
+                      {s.title}
+                    </div>
+                    <div
+                      className={`font-body text-[10px] mt-0.5 ${isActive ? "text-white/40" : "text-[#0D1D46]/35"}`}
+                    >
+                      {s.subtitle}
+                    </div>
                   </div>
-                  <span className={`font-heading font-900 text-[10px] tracking-widest ${isActive ? "text-[#DF5B10]" : "text-[#0D1D46]/20"}`}>{s.num}</span>
+                  <span
+                    className={`font-heading font-900 text-[10px] tracking-widest ${isActive ? "text-[#DF5B10]" : "text-[#0D1D46]/20"}`}
+                  >
+                    {s.num}
+                  </span>
                 </button>
               );
             })}
@@ -200,44 +258,53 @@ export default function Services() {
                   fill
                   className="object-cover animate-ken-burns"
                   sizes="100vw"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D1D46]/70 via-[#0D1D46]/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-5 flex items-end justify-between w-full">
                   <div>
-                    <div className="font-heading font-900 text-2xl text-white">{current.title}</div>
-                    <div className="font-body text-xs text-white/60 mt-0.5">{current.subtitle}</div>
+                    <div className="font-heading font-900 text-2xl text-white">
+                      {current.title}
+                    </div>
+                    <div className="font-body text-xs text-white/60 mt-0.5">
+                      {current.subtitle}
+                    </div>
                   </div>
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: current.accent }}>
-                    {(() => { const CIcon = ICON_MAP[current.icon]; return <CIcon size={18} className="text-white" />; })()}
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center"
+                    style={{ backgroundColor: current.accent }}
+                  >
+                    {(() => {
+                      const CIcon = ICON_MAP[current.icon];
+                      return <CIcon size={18} className="text-white" />;
+                    })()}
                   </div>
                 </div>
               </div>
               <div className="p-5 flex flex-col gap-4">
-                <p className="font-body text-[#0D1D46]/65 text-sm leading-relaxed">{current.descriptionShort}</p>
-                {current.sub && (
-                  <div className="flex gap-2">
-                    {current.sub.map((s) => {
-                      const SubIcon = ICON_MAP[s.icon];
-                      return (
-                        <div key={s.label} className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#f8f7f4] border border-[#e8e4dd] flex-1">
-                          <SubIcon size={12} style={{ color: "#DF5B10" }} />
-                          <span className="font-heading font-700 text-xs text-[#0D1D46]">{s.label}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-                <div className="flex flex-wrap gap-1.5">
+                <p className="font-body text-[#0D1D46]/65 text-sm leading-relaxed">
+                  {current.descriptionShort}
+                </p>
+                <div className="flex flex-wrap gap-1.5 min-h-10">
                   {current.features.map((f, i) => (
                     <FeatureChip key={f} f={f} i={i} active={active} />
                   ))}
                 </div>
                 <div className="flex gap-2">
-                  <a href="#contact" className="group inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-[#0D1D46] text-white font-heading font-700 text-sm tracking-wide hover:bg-[#1a2f6b] transition-all shadow-[0_4px_16px_rgba(13,29,70,0.25)]">
+                  <a
+                    href="#contact"
+                    className="group inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-[#0D1D46] text-white font-heading font-700 text-sm tracking-wide hover:bg-[#1a2f6b] transition-all shadow-[0_4px_16px_rgba(13,29,70,0.25)]"
+                  >
                     Book Now
-                    <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight
+                      size={14}
+                      className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    />
                   </a>
-                  <a href={`/services/${current.id}`} className="group inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-[#0D1D46]/20 text-[#0D1D46] font-heading font-700 text-sm hover:border-[#DF5B10] hover:text-[#DF5B10] transition-all">
+                  <a
+                    href={`/services/${current.id}`}
+                    className="group inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-[#0D1D46]/20 text-[#0D1D46] font-heading font-700 text-sm hover:border-[#DF5B10] hover:text-[#DF5B10] transition-all"
+                  >
                     Learn More
                   </a>
                 </div>
@@ -290,8 +357,9 @@ export default function Services() {
                     alt={current.title}
                     fill
                     className="object-cover"
-                    sizes="60vw"
+                    sizes="(max-width: 1024px) 100vw, 60vw"
                     priority={active === 0}
+                    loading={active === 0 ? undefined : "lazy"}
                   />
                 </motion.div>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D1D46]/70 via-[#0D1D46]/20 to-transparent" />
@@ -301,17 +369,29 @@ export default function Services() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.15, duration: 0.5 }}
                   >
-                    <div className="font-heading font-900 text-3xl text-white">{current.title}</div>
-                    <div className="font-body text-sm text-white/60 mt-0.5">{current.subtitle}</div>
+                    <div className="font-heading font-900 text-3xl text-white">
+                      {current.title}
+                    </div>
+                    <div className="font-body text-sm text-white/60 mt-0.5">
+                      {current.subtitle}
+                    </div>
                   </motion.div>
                   <motion.div
                     initial={{ opacity: 0, scale: 0.7, rotate: -10 }}
                     animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                    transition={{ delay: 0.2, type: "spring", stiffness: 250, damping: 18 }}
+                    transition={{
+                      delay: 0.2,
+                      type: "spring",
+                      stiffness: 250,
+                      damping: 18,
+                    }}
                     className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg"
                     style={{ backgroundColor: current.accent }}
                   >
-                    {(() => { const CIcon = ICON_MAP[current.icon]; return <CIcon size={24} className="text-white" />; })()}
+                    {(() => {
+                      const CIcon = ICON_MAP[current.icon];
+                      return <CIcon size={24} className="text-white" />;
+                    })()}
                   </motion.div>
                 </div>
                 <div className="absolute top-5 right-6 font-heading font-900 text-8xl text-white/5 leading-none select-none">
@@ -329,26 +409,7 @@ export default function Services() {
                   {current.descriptionShort}
                 </motion.p>
 
-                {current.sub && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.18 }}
-                    className="flex gap-3 mb-6"
-                  >
-                    {current.sub.map((s) => {
-                      const SubIcon = ICON_MAP[s.icon];
-                      return (
-                        <div key={s.label} className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#f8f7f4] border border-[#e8e4dd] flex-1">
-                          <SubIcon size={14} style={{ color: "#DF5B10" }} />
-                          <span className="font-heading font-700 text-xs text-[#0D1D46]">{s.label}</span>
-                        </div>
-                      );
-                    })}
-                  </motion.div>
-                )}
-
-                <div className="flex flex-wrap gap-2 mb-8">
+                <div className="flex flex-wrap gap-2 mb-8 min-h-10">
                   {current.features.map((f, i) => (
                     <FeatureChip key={f} f={f} i={i} active={active} />
                   ))}
@@ -365,7 +426,10 @@ export default function Services() {
                                hover:-translate-y-0.5 shadow-[0_4px_16px_rgba(13,29,70,0.25)]"
                   >
                     Book Now
-                    <ArrowUpRight size={15} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight
+                      size={15}
+                      className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    />
                   </motion.a>
                   <motion.a
                     href={`/services/${current.id}`}
@@ -377,7 +441,10 @@ export default function Services() {
                                transition-all duration-300"
                   >
                     Learn More
-                    <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight
+                      size={14}
+                      className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    />
                   </motion.a>
                 </div>
               </div>
@@ -395,14 +462,23 @@ export default function Services() {
         >
           <div
             className="absolute inset-0 opacity-5"
-            style={{ backgroundImage: `linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)`, backgroundSize: "32px 32px" }}
+            style={{
+              backgroundImage: `linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)`,
+              backgroundSize: "32px 32px",
+            }}
           />
           {/* Sweep shimmer on hover */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/4 to-transparent
-                          -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out pointer-events-none" />
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/4 to-transparent
+                          -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out pointer-events-none"
+          />
           <div className="relative z-10">
-            <span className="font-heading font-800 text-white text-lg">Not sure which service fits?</span>
-            <span className="font-body text-white/45 text-sm ml-3">We'll help you figure it out.</span>
+            <span className="font-heading font-800 text-white text-lg">
+              Not sure which service fits?
+            </span>
+            <span className="font-body text-white/45 text-sm ml-3">
+              We'll help you figure it out.
+            </span>
           </div>
           <a
             href="#contact"

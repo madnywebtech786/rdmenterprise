@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     q: "What areas do you serve?",
-    a: "We cover the entire Greater Toronto Area including Toronto, Mississauga, Brampton, Vaughan, Markham, Scarborough, and more. See the full list in our Areas section above.",
+    a: "We cover Calgary and surrounding communities including Airdrie, Cochrane, Chestermere, Okotoks, Strathmore, and more. See the full list in our Areas section above.",
   },
   {
     q: "How does hourly labour work?",

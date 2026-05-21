@@ -5,16 +5,16 @@ import { useRef, useState } from "react";
 import { ArrowUpRight, MapPin } from "lucide-react";
 
 const locations = [
-  { name: "Toronto",     tag: "Main Hub",   desc: "Downtown to the Beaches. Full coverage across all 44 neighbourhoods.", x: 52, y: 46, major: true  },
-  { name: "Mississauga", tag: "West GTA",   desc: "Port Credit to Malton. Fast same-day routes throughout.",               x: 30, y: 58, major: true  },
-  { name: "Brampton",    tag: "Northwest",  desc: "Bramalea to Heart Lake. Residential and commercial covered.",           x: 22, y: 38, major: true  },
-  { name: "Vaughan",     tag: "North GTA",  desc: "Woodbridge to Maple. Office moves and deliveries daily.",               x: 44, y: 26, major: false },
-  { name: "Markham",     tag: "Northeast",  desc: "Unionville to Cornell. Serving the tech corridor and beyond.",          x: 66, y: 26, major: false },
-  { name: "Scarborough", tag: "East Toronto",desc: "Agincourt to Rouge Hill. Pickups and deliveries every day.",           x: 67, y: 48, major: false },
+  { name: "Calgary",     tag: "Main Hub",    desc: "Downtown to the suburbs. Full coverage across all Calgary communities.",     x: 50, y: 45, major: true  },
+  { name: "Airdrie",     tag: "North",       desc: "Just north of Calgary. Fast same-day routes throughout Airdrie.",             x: 50, y: 22, major: true  },
+  { name: "Cochrane",    tag: "Northwest",   desc: "Scenic foothill town. Residential and commercial moves covered.",             x: 22, y: 32, major: true  },
+  { name: "Chestermere", tag: "East",        desc: "Lakeside community east of Calgary. Pickups and deliveries every day.",       x: 74, y: 45, major: false },
+  { name: "Okotoks",     tag: "South",       desc: "Growing south of Calgary. Office moves and deliveries daily.",                x: 50, y: 72, major: false },
+  { name: "Strathmore",  tag: "Southeast",   desc: "Wheatland County hub. Serving the prairie corridor and beyond.",             x: 78, y: 62, major: false },
 ];
 
-const torontoX = 52;
-const torontoY = 46;
+const calgaryX = 50;
+const calgaryY = 45;
 
 export default function Areas() {
   const ref    = useRef(null);
@@ -46,14 +46,14 @@ export default function Areas() {
             transition={{ delay: 0.1 }}
             className="font-heading font-900 text-4xl md:text-6xl text-white leading-tight mb-4"
           >
-            We Cover the{" "}
+            We Cover{" "}
             <motion.span
               initial={{ opacity: 0, scale: 0.8 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 0.28, type: "spring", stiffness: 180, damping: 14 }}
               style={{ color: "#DF5B10", display: "inline-block" }}
             >
-              Entire GTA
+              Calgary & Beyond
             </motion.span>
           </motion.h2>
           <motion.p
@@ -62,7 +62,7 @@ export default function Areas() {
             transition={{ delay: 0.2 }}
             className="font-body text-white/45 text-lg max-w-md mx-auto"
           >
-            6 key service zones across the Greater Toronto Area, with same-day availability in all locations.
+            6 key service zones across Calgary and surrounding Alberta communities, with same-day availability in all locations.
           </motion.p>
         </div>
 
@@ -84,7 +84,7 @@ export default function Areas() {
                   <span className="animate-ping absolute h-full w-full rounded-full bg-secondary opacity-60" />
                   <span className="relative rounded-full h-2.5 w-2.5 bg-secondary" />
                 </span>
-                <span className="font-heading font-700 text-white/60 text-xs tracking-widest uppercase">Greater Toronto Area</span>
+                <span className="font-heading font-700 text-white/60 text-xs tracking-widest uppercase">Calgary, Alberta</span>
               </div>
               <div className="flex items-center gap-4 text-xs font-body text-white/30">
                 <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-secondary" />Hub</span>
@@ -94,38 +94,41 @@ export default function Areas() {
 
             {/* SVG */}
             <div className="flex-1 flex items-center justify-center p-4 sm:p-8">
-              <svg viewBox="0 0 100 85" className="w-full max-w-md" fill="none">
+              <svg viewBox="0 0 100 90" className="w-full max-w-md" fill="none">
 
-                {/* Lake Ontario shore */}
+                {/* Rocky Mountains silhouette — west */}
                 <path
-                  d="M 5 78 Q 28 72 52 68 Q 70 64 98 70"
-                  stroke="rgba(255,255,255,0.07)" strokeWidth="1.5" fill="none" strokeDasharray="4 3"
+                  d="M 2 60 L 8 46 L 14 52 L 20 38 L 26 44 L 30 35 L 34 42 L 36 60"
+                  stroke="rgba(255,255,255,0.06)" strokeWidth="1" fill="rgba(255,255,255,0.02)"
                 />
-                <text x="50" y="80" textAnchor="middle" fontSize="3.5"
-                  fill="rgba(255,255,255,0.2)" fontFamily="Montserrat, sans-serif">Lake Ontario</text>
+                <text x="18" y="68" textAnchor="middle" fontSize="3"
+                  fill="rgba(255,255,255,0.15)" fontFamily="Montserrat, sans-serif">Rockies</text>
 
-                {/* Radial glow behind Toronto */}
-                <circle cx={torontoX} cy={torontoY} r="18" fill="rgba(223,91,16,0.05)" />
-                <circle cx={torontoX} cy={torontoY} r="10" fill="rgba(223,91,16,0.08)" />
+                {/* Bow River hint */}
+                <path
+                  d="M 30 42 Q 42 48 50 45 Q 60 42 72 50"
+                  stroke="rgba(255,255,255,0.07)" strokeWidth="1.2" fill="none" strokeDasharray="3 2"
+                />
 
-                {/* Connection lines — animated draw-in */}
+                {/* Radial glow behind Calgary */}
+                <circle cx={calgaryX} cy={calgaryY} r="18" fill="rgba(223,91,16,0.05)" />
+                <circle cx={calgaryX} cy={calgaryY} r="10" fill="rgba(223,91,16,0.08)" />
+
+                {/* Connection lines */}
                 {locations.filter((_, i) => i !== 0).map((loc, li) => {
                   const locIdx = locations.indexOf(loc);
                   const isActiveConn = active === locIdx;
-                  const lineLen = Math.sqrt(Math.pow(loc.x - torontoX, 2) + Math.pow(loc.y - torontoY, 2));
+                  const lineLen = Math.sqrt(Math.pow(loc.x - calgaryX, 2) + Math.pow(loc.y - calgaryY, 2));
                   return (
                     <motion.line
                       key={`line-${loc.name}`}
-                      x1={torontoX} y1={torontoY}
+                      x1={calgaryX} y1={calgaryY}
                       x2={loc.x}    y2={loc.y}
                       stroke={isActiveConn ? "rgba(223,91,16,0.7)" : "rgba(223,91,16,0.18)"}
                       strokeWidth={isActiveConn ? "0.9" : "0.5"}
                       strokeDasharray={`${lineLen} ${lineLen}`}
                       initial={{ strokeDashoffset: lineLen, opacity: 0 }}
-                      animate={inView ? {
-                        strokeDashoffset: 0,
-                        opacity: 1,
-                      } : {}}
+                      animate={inView ? { strokeDashoffset: 0, opacity: 1 } : {}}
                       transition={{
                         strokeDashoffset: { duration: 0.9, delay: 0.5 + li * 0.12, ease: "easeOut" },
                         opacity: { duration: 0.3, delay: 0.5 + li * 0.12 },
@@ -148,7 +151,6 @@ export default function Areas() {
                       onClick={() => setActive(i)}
                       onMouseEnter={() => setActive(i)}
                     >
-                      {/* Pulse rings on active */}
                       {isActive && (
                         <>
                           <circle cx={loc.x} cy={loc.y} r="10" fill="none" stroke="rgba(223,91,16,0.25)" strokeWidth="0.6">
@@ -162,7 +164,6 @@ export default function Areas() {
                         </>
                       )}
 
-                      {/* Pin body */}
                       <circle
                         cx={loc.x} cy={loc.y}
                         r={isActive ? (loc.major ? 5.5 : 4) : (loc.major ? 4 : 2.8)}
@@ -172,7 +173,6 @@ export default function Areas() {
                         style={{ transition: "all 0.25s" }}
                       />
 
-                      {/* Pin stem */}
                       {isActive && (
                         <motion.line
                           initial={{ opacity: 0, scaleY: 0 }}
@@ -185,7 +185,6 @@ export default function Areas() {
                         />
                       )}
 
-                      {/* Label */}
                       <text
                         x={loc.x}
                         y={loc.y - (isActive ? (loc.major ? 7.5 : 6) : (loc.major ? 6 : 4.5))}
@@ -208,7 +207,7 @@ export default function Areas() {
             <div className="grid grid-cols-3 border-t border-white/6">
               {[
                 { val: "6",        label: "Zones" },
-                { val: "GTA",      label: "Coverage" },
+                { val: "AB",       label: "Province" },
                 { val: "Same-Day", label: "Available" },
               ].map((s, i) => (
                 <div key={s.label} className={`py-4 text-center ${i < 2 ? "border-r border-white/6" : ""}`}>
@@ -238,14 +237,12 @@ export default function Areas() {
                       : "bg-white/3 border-white/8 hover:bg-white/5 hover:border-white/15"
                   }`}
                 >
-                  {/* Pin icon */}
                   <div className={`w-8 h-8 shrink-0 rounded-xl flex items-center justify-center transition-all duration-300 ${
                     isActive ? "bg-secondary shadow-[0_4px_12px_rgba(223,91,16,0.4)]" : "bg-white/6"
                   }`}>
                     <MapPin size={13} className={isActive ? "text-white" : "text-secondary"} />
                   </div>
 
-                  {/* Text */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-1.5 mb-0.5 flex-wrap">
                       <span className={`font-heading font-800 text-sm ${isActive ? "text-white" : "text-white/80"}`}>
@@ -259,7 +256,6 @@ export default function Areas() {
                         {loc.tag}
                       </span>
                     </div>
-                    {/* Animated description reveal */}
                     <AnimatePresence mode="wait">
                       {isActive && (
                         <motion.p
@@ -280,7 +276,6 @@ export default function Areas() {
                     </AnimatePresence>
                   </div>
 
-                  {/* Active dot */}
                   <div className={`shrink-0 w-1.5 h-1.5 rounded-full mt-1 transition-all duration-300 ${
                     isActive ? "bg-secondary shadow-[0_0_8px_rgba(223,91,16,0.8)]" : "bg-white/15"
                   }`} />
@@ -293,18 +288,15 @@ export default function Areas() {
               initial={{ opacity: 0, y: 12 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.85 }}
-              className="sm:col-span-2 lg:col-span-1 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 px-5 py-4 rounded-2xl border border-secondary/20 bg-secondary/6
-                         hover:border-secondary/35 transition-colors duration-300"
+              className="sm:col-span-2 lg:col-span-1 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 px-5 py-4 rounded-2xl border border-secondary/20 bg-secondary/6 hover:border-secondary/35 transition-colors duration-300"
             >
               <div>
                 <div className="font-heading font-700 text-sm text-white mb-0.5">Don't see your city?</div>
-                <div className="font-body text-xs text-white/40">We may still cover your area. Just ask.</div>
+                <div className="font-body text-xs text-white/40">We may still cover your area across Alberta. Just ask.</div>
               </div>
               <a
                 href="#contact"
-                className="shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-secondary text-white
-                           font-heading font-700 text-xs hover:bg-secondary-light transition-colors
-                           shadow-[0_4px_16px_rgba(223,91,16,0.35)] hover:-translate-y-0.5 transition-all duration-200"
+                className="shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-secondary text-white font-heading font-700 text-xs hover:bg-secondary-light transition-all duration-200 shadow-[0_4px_16px_rgba(223,91,16,0.35)] hover:-translate-y-0.5"
               >
                 Ask Us <ArrowUpRight size={12} />
               </a>
