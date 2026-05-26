@@ -33,6 +33,7 @@ const navLinks = [
       { label: "Invest With Us", href: "/services/investors" },
     ],
   },
+  { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -214,14 +215,14 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-3">
             <a
               href="tel:+18255835070"
-              className="flex items-center gap-2 px-4 py-2 rounded-full border border-[#DF5B10]/30 text-[#DF5B10] font-body font-600 text-sm hover:bg-[#DF5B10]/5 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-full border border-secondary/30 text-secondary font-body font-600 text-sm hover:bg-secondary/5 transition-colors"
             >
               <Phone size={14} />
               Call Now
             </a>
             <Link
               href="/contact"
-              className="px-5 py-2.5 rounded-full bg-[#DF5B10] text-white font-heading font-700 text-sm tracking-wide hover:bg-[#b84a0c] transition-all duration-200 shadow-[0_4px_16px_rgba(223,91,16,0.35)] hover:shadow-[0_6px_24px_rgba(223,91,16,0.45)] hover:-translate-y-0.5"
+              className="px-5 py-2.5 rounded-full bg-secondary text-white font-heading font-700 text-sm tracking-wide hover:bg-secondary-dark transition-all duration-200 shadow-[0_4px_16px_rgba(223,91,16,0.35)] hover:shadow-[0_6px_24px_rgba(223,91,16,0.45)] hover:-translate-y-0.5"
             >
               Get a Quote
             </Link>
@@ -388,7 +389,7 @@ export default function Navbar() {
               <Link
                 href="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center py-4 rounded-xl bg-[#DF5B10] text-white font-heading font-700 text-lg"
+                className="flex items-center justify-center py-4 rounded-xl bg-secondary text-white font-heading font-700 text-lg"
               >
                 Get a Free Quote
               </Link>

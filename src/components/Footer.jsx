@@ -60,7 +60,7 @@ const links = {
     "Junk Removal",
     "Hourly Labour",
   ],
-  Company: ["About Us", "Why Choose Us", "Service Areas", "Reviews", "Contact"],
+  Company: ["About Us", "Why Choose Us", "Service Areas", "Reviews", "Careers", "Contact"],
 };
 
 export default function Footer() {
