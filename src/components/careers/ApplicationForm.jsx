@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import {
   Send, CheckCircle, Loader2, Upload, X, FileText,
-  User, Phone, Mail, MapPin, Briefcase, ArrowLeft,
+  User, Phone, Mail, ArrowLeft,
 } from "lucide-react";
 import { JOBS } from "@/data/jobs";
 import ServiceSelect from "@/components/ServiceSelect";
@@ -16,7 +16,7 @@ const EMAIL_RE = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0
 
 const JOB_OPTIONS = JOBS.map((j) => ({ value: j.id, label: j.title, Icon: j.icon }));
 
-const EMPTY_FORM = { name: "", phone: "", email: "", address: "", jobId: "" };
+const EMPTY_FORM = { name: "", phone: "", email: "", message: "", jobId: "" };
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
 
 const inputCls = (err) =>
@@ -150,7 +150,7 @@ function FormInner() {
     const name = form.name.trim();
     const phone = form.phone.trim();
     const email = form.email.trim();
-    const address = form.address.trim();
+    const message = form.message.trim();
 
     if (!name || name.length < 2)                 e.name    = "Please enter your full name.";
     if (name.length > 100)                         e.name    = "Name is too long.";
@@ -158,8 +158,8 @@ function FormInner() {
     if (phone.length > 30)                         e.phone   = "Phone number is too long.";
     if (!email)                                    e.email   = "Email address is required.";
     else if (!EMAIL_RE.test(email))               e.email   = "Please enter a valid email address.";
-    if (!address || address.length < 5)           e.address = "Please enter your address.";
-    if (address.length > 200)                      e.address = "Address is too long.";
+    if (!message || message.length < 10)          e.message = "Please include a short message (at least 10 characters).";
+    if (message.length > 2000)                    e.message = "Message is too long (max 2000 characters).";
     if (!form.jobId)                               e.jobId   = "Please select the position you're applying for.";
     if (!resume)                                   e.resume  = "Please upload your resume (PDF).";
     return e;
@@ -183,7 +183,7 @@ function FormInner() {
       fd.append("name",    form.name.trim());
       fd.append("phone",   form.phone.trim());
       fd.append("email",   form.email.trim());
-      fd.append("address", form.address.trim());
+      fd.append("message", form.message.trim());
       fd.append("jobId",   form.jobId);
       fd.append("resume",  resume);
 
@@ -350,16 +350,14 @@ function FormInner() {
                     <FieldError msg={errors.email} />
                   </div>
 
-                  {/* Address */}
+                  {/* Message */}
                   <div>
-                    <Label required>Home Address</Label>
-                    <div className="relative">
-                      <MapPin size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#0D1D46]/30 pointer-events-none" />
-                      <input type="text" name="address" value={form.address} onChange={handleChange}
-                        placeholder="123 Main St, Calgary, AB" autoComplete="street-address"
-                        className={`${inputCls(errors.address)} pl-9`} />
-                    </div>
-                    <FieldError msg={errors.address} />
+                    <Label required>Message</Label>
+                    <textarea name="message" value={form.message} onChange={handleChange}
+                      placeholder="Tell us a bit about yourself, your availability, and why you'd be a great fit..."
+                      rows={4}
+                      className={`${inputCls(errors.message)} resize-none`} />
+                    <FieldError msg={errors.message} />
                   </div>
 
                   {/* Resume upload */}

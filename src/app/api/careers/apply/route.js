@@ -31,7 +31,7 @@ const JOB_TITLES = {
 
 // ─── Email to employer ───────────────────────────────────────────────────────
 
-function buildEmployerEmail({ name, email, phone, address, jobTitle }) {
+function buildEmployerEmail({ name, email, phone, message, jobTitle }) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/></head>
@@ -89,15 +89,14 @@ function buildEmployerEmail({ name, email, phone, address, jobTitle }) {
                   <a href="tel:${phone.replace(/\D/g, "")}" style="font-family:'Segoe UI',sans-serif;font-size:15px;color:#0D1D46;font-weight:600;text-decoration:none;">${phone}</a>
                 </td>
               </tr>
-              <tr>
-                <td style="padding:10px 0;">
-                  <span style="font-family:'Segoe UI',sans-serif;font-size:12px;color:#9b8f80;text-transform:uppercase;letter-spacing:1px;font-weight:600;">Address</span><br/>
-                  <span style="font-family:'Segoe UI',sans-serif;font-size:15px;color:#0D1D46;font-weight:600;">${address}</span>
-                </td>
-              </tr>
             </table>
 
-            <div style="margin-top:28px;padding:16px;background:#f8f7f4;border-radius:10px;border-left:3px solid #DF5B10;">
+            <p style="margin:24px 0 12px;font-family:'Segoe UI',sans-serif;font-size:13px;font-weight:700;color:#DF5B10;text-transform:uppercase;letter-spacing:1px;">Message</p>
+            <div style="background:#f8f7f4;border-radius:10px;padding:18px;border-left:3px solid #DF5B10;">
+              <p style="margin:0;font-family:'Segoe UI',sans-serif;font-size:14px;color:#0D1D46;line-height:1.7;white-space:pre-wrap;">${message}</p>
+            </div>
+
+            <div style="margin-top:20px;padding:16px;background:#f8f7f4;border-radius:10px;">
               <p style="margin:0;font-family:'Segoe UI',sans-serif;font-size:13px;color:#0D1D46;">
                 Resume attached as PDF below. Review and reply directly to the applicant.
               </p>
@@ -264,7 +263,7 @@ export async function POST(request) {
     const name    = sanitize(formData.get("name")    ?? "");
     const phone   = sanitize(formData.get("phone")   ?? "");
     const email   = sanitize(formData.get("email")   ?? "");
-    const address = sanitize(formData.get("address") ?? "");
+    const message = sanitize(formData.get("message") ?? "");
     const jobId   = sanitize(formData.get("jobId")   ?? "");
     const resume  = formData.get("resume");
 
@@ -280,8 +279,8 @@ export async function POST(request) {
     if (!email)                           errors.email   = "Email address is required.";
     else if (!EMAIL_RE.test(email))       errors.email   = "Please enter a valid email address.";
 
-    if (!address || address.length < 5)   errors.address = "Please enter your address.";
-    if (address.length > 200)             errors.address = "Address is too long.";
+    if (!message || message.length < 10)  errors.message = "Please include a short message (at least 10 characters).";
+    if (message.length > 2000)            errors.message = "Message is too long (max 2000 characters).";
 
     if (!jobId || !VALID_JOB_IDS.includes(jobId))
                                           errors.jobId   = "Please select a valid position.";
@@ -325,7 +324,7 @@ export async function POST(request) {
       to:      process.env.CONTACT_RECEIVER_EMAIL,
       replyTo: email,
       subject: `New Job Application — ${jobTitle} from ${name}`,
-      html:    buildEmployerEmail({ name, email, phone, address, jobTitle }),
+      html:    buildEmployerEmail({ name, email, phone, message, jobTitle }),
       attachments: [
         {
           filename:    `${name.replace(/\s+/g, "_")}_Resume.pdf`,
