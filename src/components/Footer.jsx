@@ -53,7 +53,7 @@ const socials = [
 
 const links = {
   Services: [
-    "Delivery",
+    "Delivery Service",
     "Moving Services",
     "Packing & Unpacking",
     "Office Move",

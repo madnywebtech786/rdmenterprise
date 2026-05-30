@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ChevronDown, Check, PackageOpen, Archive, Building2, Trash2, HardHat, MessageCircle, Home, Briefcase, TrendingUp, LayoutGrid, Sofa, Leaf, ClipboardList } from "lucide-react";
+import { ChevronDown, Check, PackageOpen, Archive, Building2, Trash2, HardHat, MessageCircle, Home, Briefcase, TrendingUp, LayoutGrid, Sofa, Leaf, ClipboardList, Package } from "lucide-react";
 
 const SERVICE_OPTIONS = [
   { value: "Residential Moving",   label: "Residential Moving",   Icon: Home         },
@@ -11,6 +11,7 @@ const SERVICE_OPTIONS = [
   { value: "Office Moving",        label: "Office Moving",        Icon: Building2    },
   { value: "Junk Removal",         label: "Junk Removal",         Icon: Trash2       },
   { value: "Jobsite Labour",       label: "Jobsite Labour",       Icon: HardHat      },
+  { value: "Delivery Service",     label: "Delivery Service",     Icon: Package      },
   { value: "Investor Relations",   label: "Investor Relations",   Icon: TrendingUp   },
   { value: "Other",                label: "Other",                Icon: MessageCircle },
 ];

@@ -17,7 +17,7 @@ const JUNK_SERVICES   = ["Junk Removal"];
 const VALID_SERVICES = [
   "Residential Moving", "Commercial Moving", "Packing & Unpacking",
   "Office Moving", "Moving Services", "Junk Removal", "Jobsite Labour",
-  "Investor Relations", "Other",
+  "Delivery Service", "Investor Relations", "Other",
 ];
 
 const VALID_PROPERTY_TYPES = ["House", "Apartment", "Condo", "Office"];

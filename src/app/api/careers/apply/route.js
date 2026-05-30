@@ -18,6 +18,7 @@ const VALID_JOB_IDS = [
   "packing-specialist",
   "commercial-mover",
   "jobsite-labourer",
+  "delivery-driver",
 ];
 
 const JOB_TITLES = {
@@ -27,6 +28,7 @@ const JOB_TITLES = {
   "packing-specialist":      "Packing & Unpacking Specialist",
   "commercial-mover":        "Commercial Mover",
   "jobsite-labourer":        "Jobsite Labourer",
+  "delivery-driver":         "Delivery Driver",
 };
 
 // ─── Email to employer ───────────────────────────────────────────────────────

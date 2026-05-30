@@ -1,13 +1,13 @@
 import {
   Truck, PackageOpen, Building2, Trash2,
   HardHat, Zap, MapPin, Leaf, Recycle, Clock, Users,
-  CheckCircle2, Shield, TrendingUp, Home, Briefcase, Box, Archive,
+  CheckCircle2, Shield, TrendingUp, Home, Briefcase, Box, Archive, Package,
 } from "lucide-react";
 
 export const ICON_MAP = {
   Truck, PackageOpen, Building2, Trash2,
   HardHat, Zap, MapPin, Leaf, Recycle, Clock, Users,
-  CheckCircle2, Shield, TrendingUp, Home, Briefcase, Box, Archive,
+  CheckCircle2, Shield, TrendingUp, Home, Briefcase, Box, Archive, Package,
 };
 
 export const movingSubServices = [
@@ -226,6 +226,37 @@ export const services = [
     ],
   },
   {
+    id: "delivery",
+    icon: "Package",
+    title: "Delivery Service",
+    subtitle: "Same-Day Calgary Delivery",
+    tagline: "Your package, delivered fast. Same-day across Calgary.",
+    descriptionShort: "Reliable same-day and scheduled package delivery across Calgary and surrounding areas. From single parcels to multi-stop commercial deliveries — fast, tracked, and handled with care.",
+    descriptionLong: "RDM's Delivery Service covers Calgary and surrounding communities including Airdrie, Cochrane, Chestermere, Okotoks, and Strathmore. Whether you're a business needing regular courier runs or an individual sending a package across the city, our drivers pick up on your schedule and deliver with care. All deliveries are handled by our own vetted, insured team , no third-party couriers. We offer same-day pickup and delivery for most Calgary addresses, and next-day for surrounding areas.",
+    image: "/images/delivery-service.webp",
+    imageMobile: "/images/delivery-service.webp",
+    accent: "#0D1D46",
+    num: "04",
+    features: ["Same-day delivery", "Multi-stop routes", "Business & personal"],
+    sub: [
+      { icon: "Zap",    label: "Same-Day Available" },
+      { icon: "MapPin", label: "Calgary-Wide Coverage" },
+    ],
+    highlights: [
+      { icon: "Zap",          title: "Same-Day Delivery",       body: "Order by 10am for same-day delivery to most Calgary addresses. Fast, reliable, no middlemen." },
+      { icon: "MapPin",       title: "Calgary-Wide Coverage",   body: "We cover all Calgary neighbourhoods and surrounding communities: Airdrie, Cochrane, Chestermere, Okotoks, and Strathmore." },
+      { icon: "Shield",       title: "Insured & Vetted Drivers", body: "Every driver on our team is background-checked and covered by full delivery insurance. Your package is in safe hands." },
+      { icon: "CheckCircle2", title: "Business Accounts",       body: "Regular delivery routes, recurring pickups, and priority scheduling for local businesses. Contact us for a custom plan." },
+    ],
+    faqs: [
+      { q: "What areas do you deliver to?", a: "All Calgary neighbourhoods plus Airdrie, Cochrane, Chestermere, Okotoks, Strathmore, and surrounding areas." },
+      { q: "Do you offer same-day delivery?", a: "Yes — order by 10am for same-day delivery within Calgary. Surrounding areas are typically next-day." },
+      { q: "What size packages can you handle?", a: "From small parcels to large boxes and oversized items. If it fits in our vehicle, we'll deliver it." },
+      { q: "Can you do recurring business deliveries?", a: "Absolutely. We work with local businesses on scheduled daily or weekly delivery routes. Contact us for a quote." },
+      { q: "Is my package insured during delivery?", a: "Yes. All deliveries are covered by our commercial insurance policy." },
+    ],
+  },
+  {
     id: "investors",
     icon: "TrendingUp",
     title: "Investor Relations",
@@ -236,7 +267,7 @@ export const services = [
     image: "/images/invest-with-us.webp",
     imageMobile: "/images/invest-with-us.webp",
     accent: "#DF5B10",
-    num: "04",
+    num: "05",
     features: ["Alberta expansion", "Partnership opportunities", "Strategic growth"],
     sub: [
       { icon: "TrendingUp", label: "Growth Opportunities" },
