@@ -8,8 +8,9 @@ import ServiceSelect, { PROPERTY_TYPE_OPTIONS, JUNK_TYPE_OPTIONS } from "./Servi
 // RFC 5322 email regex — same as backend
 const EMAIL_RE = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/;
 
-const MOVING_SERVICES = ["Residential Moving", "Commercial Moving", "Packing & Unpacking", "Office Moving", "Moving Services"];
-const JUNK_SERVICES   = ["Junk Removal"];
+const MOVING_SERVICES   = ["Residential Moving", "Commercial Moving", "Packing & Unpacking", "Office Moving", "Moving Services"];
+const JUNK_SERVICES     = ["Junk Removal"];
+const DELIVERY_SERVICES = ["Delivery Service"];
 
 const contactInfo = [
   { icon: Phone,  label: "Phone",        value: "+1 (825) 583-5070",      href: "tel:+18255835070" },
@@ -74,8 +75,9 @@ export default function ContactForm() {
   const [form,   setForm]   = useState(EMPTY_FORM);
   const [errors, setErrors] = useState({});
 
-  const isMoving = MOVING_SERVICES.includes(form.service);
-  const isJunk   = JUNK_SERVICES.includes(form.service);
+  const isMoving   = MOVING_SERVICES.includes(form.service);
+  const isJunk     = JUNK_SERVICES.includes(form.service);
+  const isDelivery = DELIVERY_SERVICES.includes(form.service);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -98,7 +100,7 @@ export default function ContactForm() {
     if (!form.message.trim() || form.message.trim().length < 10) e.message = "Please describe your job (at least 10 characters).";
 
     if (isMoving || isJunk) {
-      if (!form.movingDate)    e.movingDate    = "Please provide a date.";
+      if (!form.movingDate)           e.movingDate    = "Please provide a date.";
       if (!form.pickupAddress.trim()) e.pickupAddress = "Pickup address is required.";
     }
     if (isMoving) {
@@ -107,6 +109,11 @@ export default function ContactForm() {
     }
     if (isJunk) {
       if (!form.junkType) e.junkType = "Please select a junk type.";
+    }
+    if (isDelivery) {
+      if (!form.movingDate)            e.movingDate     = "Please provide a delivery date.";
+      if (!form.pickupAddress.trim())  e.pickupAddress  = "Pickup address is required.";
+      if (!form.dropoffAddress.trim()) e.dropoffAddress = "Drop-off address is required.";
     }
     return e;
   }
@@ -394,6 +401,37 @@ export default function ContactForm() {
                               placeholder="123 Main St, Calgary, AB" autoComplete="street-address"
                               className={inputCls(errors.pickupAddress)} />
                             <FieldError msg={errors.pickupAddress} />
+                          </div>
+                        </motion.div>
+                      )}
+
+                      {/* Delivery-specific fields */}
+                      {isDelivery && (
+                        <motion.div key="delivery-fields"
+                          initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                          className="flex flex-col gap-5"
+                        >
+                          <div>
+                            <Label required>Delivery Date</Label>
+                            <input type="date" name="movingDate" value={form.movingDate} onChange={handleChange}
+                              min={new Date().toISOString().split("T")[0]}
+                              className={inputCls(errors.movingDate)} />
+                            <FieldError msg={errors.movingDate} />
+                          </div>
+                          <div>
+                            <Label required>Pickup Address</Label>
+                            <input type="text" name="pickupAddress" value={form.pickupAddress} onChange={handleChange}
+                              placeholder="123 Main St, Calgary, AB" autoComplete="street-address"
+                              className={inputCls(errors.pickupAddress)} />
+                            <FieldError msg={errors.pickupAddress} />
+                          </div>
+                          <div>
+                            <Label required>Drop-off Address</Label>
+                            <input type="text" name="dropoffAddress" value={form.dropoffAddress} onChange={handleChange}
+                              placeholder="456 Oak Ave, Airdrie, AB"
+                              className={inputCls(errors.dropoffAddress)} />
+                            <FieldError msg={errors.dropoffAddress} />
                           </div>
                         </motion.div>
                       )}

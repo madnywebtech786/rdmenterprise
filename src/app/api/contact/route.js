@@ -11,8 +11,9 @@ function sanitize(str) {
 }
 
 // Moving services that trigger extra fields
-const MOVING_SERVICES = ["Residential Moving", "Commercial Moving", "Packing & Unpacking", "Office Moving", "Moving Services"];
-const JUNK_SERVICES   = ["Junk Removal"];
+const MOVING_SERVICES   = ["Residential Moving", "Commercial Moving", "Packing & Unpacking", "Office Moving", "Moving Services"];
+const JUNK_SERVICES     = ["Junk Removal"];
+const DELIVERY_SERVICES = ["Delivery Service"];
 
 const VALID_SERVICES = [
   "Residential Moving", "Commercial Moving", "Packing & Unpacking",
@@ -28,8 +29,9 @@ const VALID_JUNK_TYPES = [
 ];
 
 function buildEmailHtml({ name, email, phone, service, message, movingDate, pickupAddress, dropoffAddress, propertyType, junkType }) {
-  const isMoving = MOVING_SERVICES.includes(service);
-  const isJunk   = JUNK_SERVICES.includes(service);
+  const isMoving   = MOVING_SERVICES.includes(service);
+  const isJunk     = JUNK_SERVICES.includes(service);
+  const isDelivery = DELIVERY_SERVICES.includes(service);
 
   const conditionalRows = isMoving ? `
     <tr>
@@ -73,6 +75,25 @@ function buildEmailHtml({ name, email, phone, service, message, movingDate, pick
       <td style="padding:10px 0;border-bottom:1px solid #f0ede8;">
         <span style="font-family:'Segoe UI',sans-serif;font-size:12px;color:#9b8f80;text-transform:uppercase;letter-spacing:1px;font-weight:600;">Junk Type</span><br/>
         <span style="font-family:'Segoe UI',sans-serif;font-size:15px;color:#0D1D46;font-weight:600;">${junkType || "—"}</span>
+      </td>
+    </tr>
+  ` : isDelivery ? `
+    <tr>
+      <td style="padding:10px 0;border-bottom:1px solid #f0ede8;">
+        <span style="font-family:'Segoe UI',sans-serif;font-size:12px;color:#9b8f80;text-transform:uppercase;letter-spacing:1px;font-weight:600;">Delivery Date</span><br/>
+        <span style="font-family:'Segoe UI',sans-serif;font-size:15px;color:#0D1D46;font-weight:600;">${movingDate || "—"}</span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:10px 0;border-bottom:1px solid #f0ede8;">
+        <span style="font-family:'Segoe UI',sans-serif;font-size:12px;color:#9b8f80;text-transform:uppercase;letter-spacing:1px;font-weight:600;">Pickup Address</span><br/>
+        <span style="font-family:'Segoe UI',sans-serif;font-size:15px;color:#0D1D46;font-weight:600;">${pickupAddress || "—"}</span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:10px 0;border-bottom:1px solid #f0ede8;">
+        <span style="font-family:'Segoe UI',sans-serif;font-size:12px;color:#9b8f80;text-transform:uppercase;letter-spacing:1px;font-weight:600;">Drop-off Address</span><br/>
+        <span style="font-family:'Segoe UI',sans-serif;font-size:15px;color:#0D1D46;font-weight:600;">${dropoffAddress || "—"}</span>
       </td>
     </tr>
   ` : "";
@@ -143,7 +164,7 @@ function buildEmailHtml({ name, email, phone, service, message, movingDate, pick
               <tr>
                 <td style="padding:10px 0;border-bottom:1px solid #f0ede8;">
                   <span style="font-family:'Segoe UI',sans-serif;font-size:12px;color:#9b8f80;text-transform:uppercase;letter-spacing:1px;font-weight:600;">Service Type</span><br/>
-                  <span style="font-family:'Segoe UI',sans-serif;font-size:15px;color:#0D1D46;font-weight:600;">${isMoving ? "Moving Service" : isJunk ? "Junk Removal Service" : "Other Service"}</span>
+                  <span style="font-family:'Segoe UI',sans-serif;font-size:15px;color:#0D1D46;font-weight:600;">${isMoving ? "Moving Service" : isJunk ? "Junk Removal Service" : isDelivery ? "Delivery Service" : "Other Service"}</span>
                 </td>
               </tr>
               ${conditionalRows}
@@ -216,8 +237,9 @@ export async function POST(request) {
     if (!message || message.length < 10)   errors.message = "Please provide a brief description (at least 10 characters).";
     if (message.length > 2000)             errors.message = "Message is too long (max 2000 characters).";
 
-    const isMoving = MOVING_SERVICES.includes(service);
-    const isJunk   = JUNK_SERVICES.includes(service);
+    const isMoving   = MOVING_SERVICES.includes(service);
+    const isJunk     = JUNK_SERVICES.includes(service);
+    const isDelivery = DELIVERY_SERVICES.includes(service);
 
     if (isMoving || isJunk) {
       if (!movingDate)                     errors.movingDate    = "Please provide the date.";
@@ -231,6 +253,11 @@ export async function POST(request) {
     if (isJunk) {
       if (!junkType || !VALID_JUNK_TYPES.includes(junkType))
                                            errors.junkType      = "Please select a junk type.";
+    }
+    if (isDelivery) {
+      if (!movingDate)                     errors.movingDate     = "Please provide a delivery date.";
+      if (!pickupAddress)                  errors.pickupAddress  = "Pickup address is required.";
+      if (!dropoffAddress)                 errors.dropoffAddress = "Drop-off address is required.";
     }
 
     if (Object.keys(errors).length > 0) {
